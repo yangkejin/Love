@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+            <title></title>
+            <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+            <link href="css/mui.css" rel="stylesheet" />
+            <script src="js/mui.js"></script>
+            <style>
+                button {
+                    width: 80%;
+                    margin-left: 10%;
+                    margin-top: 16px;
+                }
+            </style>
+            </head>
+    
+    <body>
+        <button id="daqi" type="button" class="mui-btn mui-btn-primary">大气监测管理</button>
+        <button id="OS_shui" type="button" class="mui-btn mui-btn-primary">现场监测管理</button>
+        <button id="shui" type="button" class="mui-btn mui-btn-primary">水环境管理</button>
+        <button id="tu" type="button" class="mui-btn mui-btn-primary">土壤环境管理</button>
+        <button id="vocs" type="button" class="mui-btn mui-btn-primary">VOCs环境管理</button>
+        <script type="text/javascript">
+            mui.init();
+            
+            mui.openWindow({
+                           url: 'src/shui/index.html',
+                           id: 'data_query',
+                           waiting: {
+                           title: '正在跳转...',
+                           }
+                           });
+                           
+                           document.getElementById("daqi").addEventListener("tap", function(e) {
+                                                                            mui.openWindow({
+                                                                                           url: 'src/daqi/index.html',
+                                                                                           id: 'daqi_index',
+                                                                                           waiting: {
+                                                                                           title: '正在跳转...',
+                                                                                           }
+                                                                                           });
+                                                                            });
+                                                                            document.getElementById("OS_shui").addEventListener("tap", function(e) {
+                                                                                                                                mui.openWindow({
+                                                                                                                                               url: 'src/On-site_monitoring/index.html',
+                                                                                                                                               id: 'data_query',
+                                                                                                                                               waiting: {
+                                                                                                                                               title: '正在跳转...',
+                                                                                                                                               }
+                                                                                                                                               });
+                                                                                                                                });
+                                                                                                                                document.getElementById("shui").addEventListener("tap", function(e) {
+                                                                                                                                                                                 mui.openWindow({
+                                                                                                                                                                                                url: 'src/shui/index.html',
+                                                                                                                                                                                                id: 'data_query',
+                                                                                                                                                                                                waiting: {
+                                                                                                                                                                                                title: '正在跳转...',
+                                                                                                                                                                                                }
+                                                                                                                                                                                                });
+                                                                                                                                                                                 });
+                                                                                                                                                                                 document.getElementById("tu").addEventListener("tap", function(e) {
+                                                                                                                                                                                                                                mui.openWindow({
+                                                                                                                                                                                                                                               url: 'src/tu/index.html',
+                                                                                                                                                                                                                                               id: 'data_query',
+                                                                                                                                                                                                                                               waiting: {
+                                                                                                                                                                                                                                               title: '正在跳转...',
+                                                                                                                                                                                                                                               }
+                                                                                                                                                                                                                                               });
+                                                                                                                                                                                                                                });
+                                                                                                                                                                                                                                document.getElementById("vocs").addEventListener("tap", function(e) {
+                                                                                                                                                                                                                                                                                 mui.openWindow({
+                                                                                                                                                                                                                                                                                                url: 'src/VOCs/index.html',
+                                                                                                                                                                                                                                                                                                id: 'VOCs_index',
+                                                                                                                                                                                                                                                                                                waiting: {
+                                                                                                                                                                                                                                                                                                title: '正在跳转...',
+                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                });
+                                                                                                                                                                                                                                                                                 });
+            </script>
+    </body>
+    
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/VCOs/annex.css" rel="stylesheet" />
+		<script src="../../js/mui.js"></script>
+		
+		<script src="../../lib/data/VOCs/URLs.js"></script>
+		<script src="../../lib/data/VOCs/Datas.js"></script>
+		<script src="../../lib/data/Internet.js"></script>
+		<script src="../../lib/data/StorageTool.js"></script>
+		<script src="../../lib/data/webSQLTool.js"></script>
+
+		<script src="../../lib/tool/DateTool.js"></script>
+		<script src="../../lib/vue.min.js"></script>
+	</head>
+
+	<body>
+
+		<div class="content">
+			<div class="header">
+				<span id="header_title">企业附件</span>
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+			</div>
+			<div class="table_content">
+				<div class="table">
+					<table border="1">
+						<tr>
+							<th>序号</th>
+							<th>文件名</th>
+							<th>上传时间</th>
+							<th></th>
+						</tr>
+						<tr v-for="(item,index) in list">
+							<td>{{index}}</td>
+							<td>{{item.FILENAMESRC}}</td>
+							<td v-html="getTimePoint(item.CREATEDATE)"></td>
+							<td>
+								<button id="view_btn" type="button" @click="viewClick(item)">
+									预览
+								</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/VOCs/annex.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.back();
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<script src="../../lib/TabBar.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+ 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar-tab {
+				background-color: black;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav id="nav" class="mui-bar mui-bar-tab">
+		</nav>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground("#2a68cd");
+			});
+			
+			var tabbar = new tabbar();
+			tabbar.subpages = ['home.html', 'corporateInformation.html', 'emissionStatus.html','fileQuery.html'];
+			tabbar.SelectTextColor = ['#2572B5', '#2572B5', '#2572B5', '#2572B5'];
+			tabbar.UnSelectTextColor = ['#959595', '#959595', '#959595', '#959595'];
+			tabbar.Titles = ['首页地图', '企业信息', '排放现状', '文件查询'];
+			tabbar.SelectImages = ['../../img/VOCs/home_s.png', '../../img/VOCs/corporateInformation_s.png', '../../img/VOCs/emissionStatus_s.png','../../img/VOCs/fileQuery_s.png'];
+			tabbar.UnSelectImages = ['../../img/VOCs/home.png', '../../img/VOCs/corporateInformation.png', '../../img/VOCs/emissionStatus.png','../../img/VOCs/fileQuery.png'];
+			tabbar.init();
+			tabbar.showTabBar();
+			tabbar.clickCallBack = function(id) {
+
+			}
+			window.addEventListener('back', function(e) {
+				mui.back(); 
+			});
+		</script>
+	</body>
+
+</html>

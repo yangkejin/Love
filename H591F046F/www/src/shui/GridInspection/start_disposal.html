@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../../js/mui.min.js"></script>
+		<link href="../../../css/daqi/reset.css" rel="stylesheet" />
+		<script src="../../../lib/vue.min.js"></script>
+		<script src="../../../lib/jquery-3.3.1.min.js"></script>
+
+		<script src="../../../lib/MultipleSelectUpDropDownMenu.js"></script>
+		<script src="../../../lib/fastclick.js"></script>
+		<link href="../../../css/shui/GridInspection/start_disposal.css" rel="stylesheet" />
+
+		<script src="../../../lib/data/shui/Datas.js"></script>
+		<script src="../../../lib/data/shui/URLs.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+
+		<script src="../../../lib/tool/DateTool.js"></script>
+
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<span id="header_title">现场处置</span>
+			<div id="back_v" class="back_v">
+				<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+		</div>
+		<div class="content">
+			<div class="item GPS">
+				<div>获取GPS位置：</div>
+				<div id="GPS_btn" class="GPS_btn">
+					<img src="../../../img/shui/icon-site-s.png" />
+					<div id="GPS_info" class="GPS_info">
+						点击获取GPS位置
+					</div>
+				</div>
+			</div>
+			<div class="item photo">
+				<div>现场照片</div>
+				<div class="photo_content">
+					<div class="photo_item" v-for="(item,index) in imgSrcs">
+						<img v-on:click="cancel(index)" id="cancel_photo" class="cancel_photo" src="../../../img/shui/AddPicture-CancelButton.png" />
+						<img id="img" v-bind:src="item.src" v-bind:dst="item.dst" />
+					</div>
+					<div id="add_photo">
+						<img id="add_img" src="../../../img/shui/NewTask.png" />
+					</div>
+				</div>
+			</div>
+
+			<div class="item recording">
+				<div>现场录音</div>
+				<div id="recording_btn" class="GPS_btn">
+					<img src="../../../img/shui/recording.svg" />
+					<div id="recording_info" class="GPS_info">
+						开始录音
+					</div>
+				</div>
+
+				<ul class="recording_ul">
+					<li v-for="(item,index) in list">
+						<div id="recording_btn" class="GPS_btn" @click="playRecording(item)">
+							<div id="recording_info" class="GPS_info">
+								{{item.name}}
+							</div>
+						</div>
+						<img width="10px" height="10px" src="../../../img/shui/CancelSelection.png" />
+					</li>
+				</ul>
+
+			</div>
+			<div class="vue_content">
+				<div class="item recording" v-for="(item,index) in ExtensionData.Details">
+					<div>{{item.PSName}}发现问题</div>
+					<div v-bind:id="getDivId(index)" class="enterprise_problem" @click="ExistingProblems(item,index)">
+						<input v-bind:id="getInputId(index)" type="text" class="mui-input enterprise_problem_input" placeholder="--请选择--"
+						 readonly="readonly" v-model="item.ExistingProblems" />
+						<img style="width:10px;margin-left: 10px;" src="../../../img/shui/drop-down.png" />
+					</div>
+				</div>
+
+				<div class="item recording">
+					<div>处置情况描述</div>
+					<textarea id='question' class="mui-input-clear question" placeholder="请输入处置情况" v-model="ExtensionData.DisposeContent"></textarea>
+				</div>
+
+			</div>
+			<div class="btn_div">
+				<button id="submit" type="button" class="mui-btn mui-btn-primary" @click="submit()">提交</button>
+			</div>
+		</div>
+		<script src="../../../js/shui/GridInspection/start_disposal.js"></script>
+		<script type="text/javascript"> 
+			mui.init();
+		</script>
+	</body>
+
+</html>

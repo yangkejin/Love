@@ -1,0 +1,132 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	font-size: 15px;
+	background-color: white;
+}
+
+.content {
+	width: 100%;
+	height: 100%;
+}
+
+.header {
+	position: fixed;
+	height: 49px;
+	line-height: 49px;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+	color: white;
+	z-index: 1001;
+	background-color: #2a68cd;
+}
+
+.header>.back_v {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	width: 50px;
+}
+
+.title {
+	height: 44px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	font-size: 0;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+#mapContainer {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+
+}
+
+#info_window {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: rgba(0, 0, 0, .5);
+	z-index: 1000;
+	display: none;
+	font-size: 12px;
+}
+
+#info_window_content {
+	position: absolute;
+	top: 115px;
+	bottom: 5%;
+	left: 5%;
+	width: 90%;
+	background-color: white;
+	overflow: auto;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+#info_window_header {
+	position: absolute;
+	top: 70px;
+	left: 5%;
+	height: 44px;
+	width: 90%;
+	text-align: center;
+	z-index: 1002;
+	background-color: white;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+#info_window_header_title {
+	display: inline-block;
+	padding-top: 10px;
+	font-size: 15px;
+}
+
+#info_window_close {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	display: inline-block;
+}
+
+#station_info_list {
+	width: 100%;
+	text-align: center;
+}
+
+#station_name {
+	margin-top: 10px;
+	font-size: 20px;
+}
+
+.item {
+	text-align: left;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.item_name {
+	display: inline-block;
+	width: 100px;
+	text-align: right;
+}
+
+.item_value {
+	display: inline-block;
+	min-height: 25px;
+	width: -webkit-calc(100% - 115px);
+	background-color: #f1f1f1;
+	border: 1px solid #ddd;
+	color: #999;
+	border-radius: 5px;
+	padding: 5px;
+	word-wrap: break-word;
+	word-break: break-all;
+}

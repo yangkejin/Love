@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+
+		<link href="../../css/daqi/rank.css" rel="stylesheet" />
+		<script src="../../lib/iscroll/iscroll-probe.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		
+		<script src="../../lib/tool/DateTool.js"></script>
+
+		<script src="../../lib/tool/PollutantFormat.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/tool/upDropDownMenu.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/fastclick.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/UpDownRefresh/UpDownRefresh.js"></script>
+		<link href="../../lib/UpDownRefresh/UpDownRefresh.css" rel="stylesheet" />
+
+		<script type="text/javascript" charset="utf-8" src="../../lib/data/Datas.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../lib/data/Internet.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../lib/data/StorageTool.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../lib/data/URLs.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../lib/data/webSQLTool.js"></script>
+ 
+		<script type="text/javascript" charset="utf-8" src="../../lib/tool/AQITool.js"></script>
+
+	</head>
+
+	<body>
+		<div class="content">
+			<div class="header">
+				<span id="header_title">实时排名</span>
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+			</div>
+			<div class="title">
+				<ul>
+					<li id="rank_btn"><img id="rank_btn_img" width="10px" height="20px" src="../../img/daqi/ascending.png" /><span> 排名</span></li>
+					<li>地区</li>
+					<li id="titlte_AQI">AQI</li>
+					<li>首要污染物</li>
+				</ul>
+			</div>
+			<div id="wrapper">
+				<div id="scroller">
+					<ul id="scroller_ul">
+						<ul class="item" v-for="(item,index) in list">
+							<li class="rank">{{item.Rank}}</li>
+							<li>{{item.Station}}</li>
+							<li>
+								<div class="value" v-bind:style="AQIStyleBGColor(index)">{{item.Value}}</div>
+							</li>
+							<li v-html="getPrimaryPollutantName(index)"></li>
+						</ul>
+					</ul>
+				</div>
+			</div>
+
+			<div class="footer">
+
+				<div class="lefe">
+					<span>参数：</span>
+					<div id="btn"><span id="btn_text">AQI</span><img id="btn_img" src="../../img/daqi/select_down_icon.png" width="10px" height="10px" /></div>
+
+				</div>
+
+				<div class="right" id="time">
+					—时更新
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.addEventListener("load", function() {
+			FastClick.attach(document.body);
+		}, false);
+
+		mui.init();
+	</script>
+	<script src="../../js/daqi/rank.js"></script>
+
+</html>

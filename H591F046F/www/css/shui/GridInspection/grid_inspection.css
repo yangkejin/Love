@@ -1,0 +1,224 @@
+body,html{
+	width: 100%;
+	height: 100%;
+	font-family: "microsoft yahei";
+}
+.container{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: #fff;
+}
+.head{
+	position: relative;
+	height: 46px;
+	font-size: 17px;
+	line-height: 46px;
+	text-align: center;
+	background: #2a68cd;
+	color: #fff;
+}
+.usr{
+	position: absolute;
+	height: 25px;
+	top: 8.5px;
+	left: 8px;
+	line-height: 25px;
+}
+.usr img{
+	width: 25px;
+	margin-right: 8px;
+	display: inline-block;
+	vertical-align: top;
+}
+.banner{
+	width: 100%;
+}
+.banner img{
+	width: 100%;
+}
+.menu-panel{
+	width: 100%;
+	padding: 15px 10px 7px;
+  box-shadow: 2px 4px 9px 0px rgba(62, 118, 168, 0.13);
+  box-sizing: border-box;
+}
+.main-menu{
+	width: 100%;
+	padding: 0 10px;
+	margin-bottom: 16px;
+	display: flex;
+	box-sizing: border-box;
+}
+.main-menu > .menu{
+	flex: 1;
+	margin: 0 10px;
+	height: 52px;
+	line-height: 38px;
+	font-size: 13px;
+	color: #fff;
+	padding: 7px 15px;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.main-menu > .menu1{
+	background-color: rgb(53, 203, 186);
+	box-shadow: 0 0 10px rgb(53, 203, 186);
+}
+.main-menu > .menu1.clicked{
+	box-shadow: none;
+}
+.main-menu > .menu2{
+  background-color: rgb(255, 193, 75);
+  box-shadow: 0 0 10px rgb(255, 193, 75);
+}
+.main-menu > .menu2.clicked{
+  box-shadow: none;
+}
+.main-menu > .menu > img{
+	height: 38px;
+	float: right;
+}
+.latest-news{
+	width: 100%;
+	padding: 0 20px;
+	font-size: 0;
+	line-height: 22px;
+	box-sizing: border-box;
+}
+.latest-news img{
+	display: inline-block;
+	vertical-align: top;
+	width: 16px;
+	margin-top: 4px;
+	margin-right: 7px;
+}
+.latest-news p {
+	width: calc(100% - 23px);
+	max-height: 44px;
+	/* text-overflow: ellipsis; */
+	font-size: 13px;
+	white-space: nowrap;
+	/* overflow: hidden; */
+	display: inline-block;
+	vertical-align: top;
+}
+.second-menu{
+	font-size: 0;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+.second-menu > .menu{
+	width: 33.3%;
+	padding-top: 23px;
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+}
+.second-menu > .menu > .icon{
+	position: relative;
+	width: 50px;
+	height: 50px;
+  border-radius: 6px;
+  display: inline-block;
+  vertical-align: top;
+}
+.second-menu > .menu > .icon > .mask{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 6px;
+	overflow: hidden;
+}
+.icon .mask::before{
+	position: absolute;
+	content: '';
+	top: -25px;
+	left: -25px;
+	width: 100px;
+	height: 100px;
+	background-color: rgba(0,0,0,0.2);
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-ms-transform: scale(0);
+	-o-transform: scale(0);
+	transform: scale(0);
+	border-radius: 50%;
+}
+.icon.touchani .mask::before{
+	-webkit-transition: transform .18s;
+	-moz-transition: transform .18s;
+	-ms-transition: transform .18s;
+	-o-transition: transform .18s;
+	transition: transform .18s;
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+}
+.second-menu > .menu > .icon > .count{
+	position: absolute;
+	right: 0;
+	top: 0;
+	min-width: 18px;
+	padding: 0 3px;
+	-webkit-transform: translate3d(50%,-50%,0);
+	-moz-transform: translate3d(50%,-50%,0);
+	-ms-transform: translate3d(50%,-50%,0);
+	-o-transform: translate3d(50%,-50%,0);
+	transform: translate3d(50%,-50%,0);
+	font-size: 13px;
+	line-height: 18px;
+	border-radius: 9px;
+	color: #fff;
+	background: #ff2f2f;
+	text-align: center;
+	box-sizing: border-box;
+}
+.second-menu .icon1{
+  background-color: rgb(117, 198, 236);
+}
+.second-menu .icon2{
+  background-color: rgb(107, 191, 136);
+}
+.second-menu .icon3{
+  background-color: rgb(220, 147, 79);
+}
+.second-menu .icon4{
+  background-color: rgb(158, 84, 137);
+}
+.second-menu > .menu > p{
+	font-size: 13px;
+	line-height: 13px;
+	margin-top: 8px;
+	color: #333;
+}
+.second-menu > .menu > .icon > img{
+	width: 32px;
+	margin: 11px;
+}
+.add-task{
+  position: fixed;
+	bottom: 14px;
+	left: 50%;
+	margin-left: -22.5px;
+  width: 45px;
+  height: 45px;
+  border: 1px solid rgb(181, 181, 181);
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0.5px 0.866px 8px 0px rgba(51, 51, 51, 0.34);
+}
+.add-task.clicked{
+	box-shadow: none;
+}
+.add-task img{
+	width: 31px;
+	margin: 7px;
+}

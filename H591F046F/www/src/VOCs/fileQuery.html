@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<script src="../../js/mui.js"></script>
+		<script src="../../lib/tool/upDropDownMenu.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		<link href="../../css/VCOs/fileQuery.css" rel="stylesheet"/>
+		
+		<script src="../../lib/data/VOCs/URLs.js"></script>
+		<script src="../../lib/data/VOCs/Datas.js"></script>
+		<script src="../../lib/data/Internet.js"></script>
+		<script src="../../lib/data/StorageTool.js"></script>
+		<script src="../../lib/data/webSQLTool.js"></script>
+
+		<script src="../../lib/tool/DateTool.js"></script>
+		<script src="../../lib/vue.min.js"></script>
+	</head>
+
+	<body>
+		<div class="content">
+			<div class="header">
+				<span id="header_title">文件查询</span>
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+			</div>
+			<div class="select_search">
+				<div class="select_search_itme">
+					<label>企业类型:</label>
+					<div id="corporate_type_btn" class="header_btn">
+						<span id="corporate_type_btn_text">==ALL==</span>
+						<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+					</div>
+				</div>
+				<div class="select_search_itme">
+					<label>所在街镇:</label>
+					<div id="street_town_btn" class="header_btn">
+						<span id="street_town_btn_text">==ALL==</span>
+						<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+					</div>
+				</div>
+				<div class="select_search_itme">
+					<label>审核情况:</label>
+					<div id="audit_situation_btn" class="header_btn">
+						<span id="audit_situation_btn_text">全部</span>
+						<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+					</div>
+				</div>
+				<!-- <button id="search_btn" type="button" class="mui-btn mui-btn-primary">查询</button> -->
+			</div>
+
+			<div class="table_content">
+				<div class="table">
+					<table border="1">
+						<tr>
+							<th>企业名称</th>
+							<th>企业类型</th>
+							<th>所在镇街</th>
+							<th>企业附件</th>
+						</tr>
+						<tr v-for="(item,index) in list">
+							<td>{{item.ENTERPRISENAME}}</td>
+							<td v-html="getENTERPRISETYPE(item.ENTERPRISETYPE)"></td>
+							<td></td>
+							<td>
+								<button id="view_btn" type="button" @click="view(item.ReportNO)">
+									<img src="../../img/VOCs/icon_edit.png" width="10px"/>&nbsp;查看
+								</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/VOCs/comm.js"></script>
+		<script src="../../js/VOCs/fileQuery.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+		</script>
+	</body>
+
+</html>

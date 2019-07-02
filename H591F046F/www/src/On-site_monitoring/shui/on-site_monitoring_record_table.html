@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.css" rel="stylesheet" />
+		<script src="../../../js/mui.js"></script>
+
+		<script src="../../../lib/vue.min.js"></script>
+		<link href="../../../css/reset.css" rel="stylesheet" />
+
+		<script src="../../../lib/data/OSM_shui_URLs.js"></script>
+		<script src="../../../lib/data/OSM_shui_Datas.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+		
+		<script src="../../../lib/fastclick.js"></script>
+		<script src="../../../lib/tool/DateTool.js"></script>
+
+		<link href="../../../css/On-site_monitoring/shui/sampling_record_table.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="all_content">
+			<div class="header">
+				<span id="header_title">地表水现场监测表</span>
+				<div id="back_v" class="back_v">
+					<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+			</div>
+
+			<div id="content" class="content">
+				<ul class="item">
+					<li class="line">
+						<img src="../../../img/On-site_monitoring/shui/info.png" width="25px" />
+						<span>表单信息</span>
+					</li>
+					<li class="line">
+						<div class="line_content">
+							<div class="line_content_item"> 
+								<p>任务类型</p>
+								<p class="balck">{{ExtensionData.TaskType}}</p>
+							</div>
+							<div class="line_content_item">
+								<p>断面名称</p>
+								<p class="balck">{{ExtensionData.RiverSectionName}}</p>
+							</div>
+							<div class="line_content_item">
+								<p>河流名称</p>
+								<p class="balck">{{ExtensionData.RiverName}}</p>
+							</div>
+						</div>
+					</li>
+					<li class="line">
+						<div class="line_content">
+							<div class="line_content_item">
+								<p>监测任务名称</p>
+								<p class="balck">{{ExtensionData.TaskTitle}}</p>
+							</div>
+						</div>
+					</li>
+					
+					<li class="line">
+						<div class="line_content">
+							<div class="input_left_name">备注</div>
+							<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.SampleDesc">
+						</div>
+					</li>
+					
+					<li class="line">
+						<div class="line_content">
+							<div>采样位置</div>
+							<div class="sampling_point" v-for="(item,index) in ExtensionData.Detail">
+								采样位置{{index+1}}
+								<button id="edit_sampling_point" type="button" class="mui-btn mui-btn-primary" @click="editSamplingPoint(item,index)">编辑</button>
+								<button id="delete_sampling_poin" style="background-color: red;color: white;" type="button" class="mui-btn" @click="deleteSamplingPoint(item,index)">删除</button>
+							</div>
+							<button id="add_sampling_poin" type="button" class="mui-btn mui-btn-primary" @click="addSamplingPoint()">增加</button>
+						</div>
+					</li>
+
+					<li class="line">
+						<div class="line_content">
+							<button id="submit_sampling_poin" style="width: 80%;margin-left: 10%;" type="button" class="mui-btn mui-btn-primary" @click="submitSamplingPoint()">保存</button>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="sampling_point_content" id="sampling_point_content">
+				<ul class="item">
+					<li class="line">
+						<img src="../../../img/On-site_monitoring/shui/info.png" width="25px" />
+						<span>采样点位{{Detail.index+1}}</span>
+					</li>
+					<li class="line">
+						<div class="line_content">
+							<div class="input_left_name">垂线</div>
+							<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.Virtical">
+						</div>
+					</li>
+					<li class="line">
+						<div class="line_content">
+							<div class="input_left_name">深度</div>
+							<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.Deep">
+						</div>
+					</li>
+					<li class="line">
+						<div class="line_content">
+							<div class="input_left_name">监测时间</div>
+							<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.WitnessTime">
+						</div>
+					</li>
+					
+					<li class="line">
+						<div class="line_content">
+							<div class="input_left_name">现场监测仪器名称及型号</div>
+							<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.MachineName">
+						</div>
+					</li>
+
+					<li class="line">
+						<div class="line_content">
+							<div class="input_left_name">仪器编号</div>
+							<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.MachineCode">
+						</div>
+					</li>
+					<li class="line">
+						<div class="line_content">
+							<div class="input_left_name">仪器有效期</div>
+							<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.MachineExpiry">
+						</div>
+					</li>
+					<li class="line">
+						<div class="line_content">
+							<div class="input_left_name">现场监测方法及依据</div>
+							<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.Experience">
+						</div>
+					</li>
+					
+					<li class="line">
+						<div class="line_content">
+							<div class="input_left_name">现场监测项目</div>
+							<ul>
+								<li class="line">
+									<div class="line_content">
+										<div class="input_left_name">水温（℃）</div>
+										<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.WT">
+									</div>
+								</li>
+								<li class="line">
+									<div class="line_content">
+										<div class="input_left_name">溶解氧（mg/L）</div>
+										<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.WDO">
+									</div>
+								</li>
+								<li class="line">
+									<div class="line_content">
+										<div class="input_left_name">pH（无量纲）</div>
+										<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.WPH">
+									</div>
+								</li>
+								<li class="line">
+									<div class="line_content">
+										<div class="input_left_name">电导率（μS/cm）</div>
+										<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.WRCOND">
+									</div>
+								</li>
+								<li class="line">
+									<div class="line_content">
+										<div class="input_left_name">浊度（度）</div>
+										<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.TURBIDITY">
+									</div>
+								</li>
+								<li class="line">
+									<div class="line_content">
+										<div class="input_left_name">透明度（cm）</div>
+										<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.PELLUCIDITY">
+									</div>
+								</li>
+								<li class="line">
+									<div class="line_content">
+										<div class="input_left_name">流速（m/s）</div>
+										<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.VEL">
+									</div>
+								</li>
+								<li class="line">
+									<div class="line_content">
+										<div class="input_left_name">流量（m3/s）</div>
+										<input id="Reporter" type="text" class="mui-input" placeholder="请输入" v-model="Detail.FLOWRATE">
+									</div>
+								</li>
+							</ul>
+						</div>
+					</li>
+					
+					
+					<button id="close_sampling_point" type="button" style="width: 80%;margin-left: 10%;" class="mui-btn mui-btn-primary" @click="closeSamplingPoint(Detail,Detail.index)">关闭</button>
+<!-- 					<button id="save_sampling_point" type="button" class="mui-btn mui-btn-primary" @click="saveSamplingPoint(Detail,Detail.index)">保存</button>
+ -->				</ul>
+			</div>
+		</div> 
+
+		<script src="../../../js/On-site_monitoring/shui/on-site_monitoring_record_table.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			// window.addEventListener("load", function() {
+			// 	FastClick.attach(document.body);
+			// }, false);
+			
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.back();
+			});
+			// var sampling_point_content = document.getElementById("sampling_point_content");
+			// document.getElementById("close_sampling_point").addEventListener("tap", function() {
+			// 	sampling_point_content.style.display = "none";
+			// });
+			// document.getElementById("save_sampling_point").addEventListener("tap", function() {
+			// 	sampling_point_content.style.display = "none";
+			// });
+			// document.getElementById("edit_sampling_point").addEventListener("tap", function() {
+			// 	sampling_point_content.style.display = "block";
+			// });
+		</script>
+	</body>
+
+</html>

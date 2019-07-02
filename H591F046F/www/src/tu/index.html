@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/daqi/mapRemoveLog.css" rel="stylesheet" />
+		<link href="../../css/daqi/reset.css" rel="stylesheet" />
+		<script src="../../lib/amapApi.js"></script>
+		<script src="../../lib/amapUI.js"></script>
+
+		<script src="../../lib/tool/upDropDownMenu.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		<script src="../../lib/fastclick.js"></script>
+		<script src="../../lib/vue.min.js"></script>
+		<script src="../../lib/iscroll/iscroll-probe.js"></script>
+
+		<script src="../../lib/data/tu_Datas.js"></script>
+		<script src="../../lib/data/Internet.js"></script>
+		<script src="../../lib/data/StorageTool.js"></script>
+		<script src="../../lib/data/tu_URLs.js"></script>
+		<script src="../../lib/data/webSQLTool.js"></script>
+
+		<link href="../../css/tu/index.css" rel="stylesheet" />
+
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<div id="map_content" class="map">
+			<div class="head">
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+				<div id="map_right_menu" class="right_menu" type="map">
+					<img src="../../img/tu/icon-list.png" style="width: 20px;" />
+				</div>
+				<span>GIS综合展示</span>
+			</div>
+			<div id="mapContainer">
+				<div style="width: 100px; display:inline;font-size: 15px;position: absolute;top: 45%;margin-left: -50px;">
+					地图加载中...
+				</div>
+			</div>
+			<div class="input_content">
+				<div class="input_item mui-input-row mui-checkbox mui-left">
+					<label>国控点</label>
+					<input name="国控点" value="Item 1" type="checkbox" checked="ture">
+				</div>
+
+				<div class="input_item mui-input-row mui-checkbox mui-left">
+					<label>市控点</label>
+					<input name="市控点" value="Item 1" type="checkbox" checked="ture">
+				</div>
+
+				<div class="input_item mui-input-row mui-checkbox mui-left">
+					<label>详查点</label>
+					<input name="详查点" value="Item 1" type="checkbox" checked="ture">
+				</div>
+			</div>
+			<img class="tip_level" src="../../img/tu/tip-level-2.png" />
+		</div>
+
+		<div id="list_content" class="list">
+			<div class="head">
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+				<div id="list_right_menu" class="right_menu" type="list">
+					<img src="../../img/tu/icon-map.png" style="width: 20px;" />
+				</div>
+				<div id="station_btn">
+					<span id="station_name">国控点</span>
+					<img src="../../img/tu/down_w.png" width="10px" />
+				</div>
+			</div>
+			<p class="number">国控点数量：23</p>
+
+			<div id="wrapper">
+				<div id="scroller">
+					<ul id="scroller_ul">
+						<li class="item" v-for="item in list" v-on:click="itemClick(item)">
+							<p class="black_color">点位编号：{{item.STATIONCODE}}</p>
+							<p class="yellow_color">点位类别：{{item.STATIONTYPE}}</p>
+							<p class="yellow_color">地理位置：{{item.ADDRESS}}</p>
+							<div class="img_content">
+								<img src="../../img/tu/more.png" width="10px" height="20px" />
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<script id="my-infowin-tpl" type="text/template">
+			<div class="amap-ui-smp-ifwn-container">
+        	  <a class="amap-ui-infowindow-close amap-ui-smp-ifwn-def-tr-close">&#10006;</a>
+            <div class="amap-ui-smp-ifwn-content-body" style="padding: 10px; padding-top: 26px;">
+                <div class="amap-ui-infowindow-body">
+                    <%= infoBody %>
+                </div>
+            </div>
+             <div class="amap-ui-smp-ifwn-combo-sharp"></div>
+        </div>
+    </script>
+		<script src="../../js/tu/index.js"></script>
+		<script type="text/javascript">
+			window.addEventListener("load", function() {
+				FastClick.attach(document.body);
+			}, false);
+
+			mui.init();
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground("#2a68cd");
+			});
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.back();
+			});
+		</script>
+	</body>
+
+</html>

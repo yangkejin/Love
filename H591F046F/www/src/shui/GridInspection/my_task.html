@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../../css/reset.css" rel="stylesheet" />
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../lib/tool/Segmentation.js"></script>
+		<script src="../../../lib/fastclick.js"></script>
+		<script src="../../../lib/jquery-3.3.1.min.js"></script>
+		<script src="../../../lib/iscroll/iscroll-probe.js"></script>
+
+		<script src="../../../lib/vue.min.js"></script>
+		<script src="../../../lib/data/shui/Datas.js"></script>
+		<script src="../../../lib/data/shui/URLs.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+
+		<link href="../../../lib/UpDownRefresh/UpDownRefresh.css" rel="stylesheet" />
+		<script src="../../../lib/UpDownRefresh/UpDownRefresh.js"></script>
+
+		<link href="../../../css/shui/GridInspection/my_task.css" rel="stylesheet" />
+
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<span id="header_title">我的任务</span>
+			<div id="back_v" class="back_v">
+				<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+		</div>
+		<div class="content">
+			<div class="page_content">
+				<div id="page"> </div>
+			</div>
+			<div id="wrapper">
+				<div id="scroller">
+					<ul id="scroller_ul">
+						<!-- 事件提醒 -->
+						<li id="Event_li" class="item event_reminder_item" v-for="(item,index) in EventList">
+							<div class="name">{{item.EventName}}</div>
+							<div class="tal-l">
+								<div class="status event_reminder" style="background-image: url(../../../img/shui/icon-red-case.png);">提醒</div>
+								<p>事件提醒</p>
+							</div>
+							<div class="tal-r">
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-name-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.EventType}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-num-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.EventCode}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-site-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.GridName}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-people-s.png" alt="" style="width: 18px">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.CreateTime}}</div>
+								</div>
+							</div>
+							
+							<div class="btn" style="display: none;">
+								<button id="see_details" type="button" class="mui-btn" style="color: cornflowerblue;border-color: cornflowerblue;">查看详情</button>
+								<button id="start_disposal" type="button" class="mui-btn">开始处置</button>
+								<button id="start_conclude" type="button" class="mui-btn">开始办结</button>
+							</div>
+						</li>
+						
+						<!-- 待处置 -->
+						<li id="PendingDisposa_li" class="item event_reminder_item" v-for="(item,index) in PendingDisposaList">
+							<div class="name">{{item.TaskName}}</div>
+							<div class="tal-l">
+								<div class="status event_reminder">处置</div>
+								<p>待处置</p>
+							</div>
+							<div class="tal-r">
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-name-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.TaskType}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-num-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.DetailedAddress}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-site-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.CreateUser}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-people-s.png" alt="" style="width: 18px">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.CreateTime}}</div>
+								</div>
+							</div>
+							<div class="btn">
+								<button id="see_details" type="button" class="mui-btn" @click="seeDetails(item.ID)" style="color: cornflowerblue;border-color: cornflowerblue;">查看详情</button>
+								<button id="start_disposal" type="button" class="mui-btn" @click="startDisposal(item.ID)">开始处置</button>
+							</div>
+						</li>
+
+						<!-- 待反馈 -->
+						<li id="PendingDisposa_li" class="item event_reminder_item" v-for="(item,index) in RemainToBeDoneList">
+							<div class="name">{{item.TaskName}}</div>
+							<div class="tal-l">
+								<div class="status event_reminder">反馈</div>
+								<p>待反馈</p>
+							</div>
+							<div class="tal-r">
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-name-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.TaskType}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-num-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.DetailedAddress}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-site-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.CreateUser}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-people-s.png" alt="" style="width: 18px">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.CreateTime}}</div>
+								</div>
+							</div>
+							<div class="btn">
+								<button id="see_details" type="button" class="mui-btn" @click="seeDetails(item.ID)" style="color: cornflowerblue;border-color: cornflowerblue;">查看详情</button>
+								<button id="start_conclude" type="button" class="mui-btn" @click="startConclude(item.ID)">开始办结</button>
+							</div>
+						</li>
+
+						<!-- 已办结 -->
+						<li id="PendingDisposa_li" class="item event_reminder_item" v-for="(item,index) in ComplatedList">
+							<div class="name">{{item.TaskName}}</div>
+							<div class="tal-l">
+								<div class="status event_reminder">办结</div>
+								<p>已办结</p>
+							</div>
+							<div class="tal-r">
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-name-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.TaskType}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-num-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.DetailedAddress}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-site-s.png" alt="">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.CreateUser}}</div>
+								</div>
+								<div class="tal orderItemed">
+									<div class="tal-l align-center orderItemed-l">
+										<img src="../../../img/shui/icon-people-s.png" alt="" style="width: 18px">
+									</div>
+									<div class="tal-r orderItemed-r">{{item.CreateTime}}</div>
+								</div>
+							</div>
+							<div class="btn">
+								<button id="see_details" type="button" class="mui-btn" @click="seeDetails(item.ID)" style="color: cornflowerblue;border-color: cornflowerblue;">查看详情</button>
+							</div>
+						</li>
+						</br>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../../../js/shui/GridInspection/my_task.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.back();
+			});
+			window.addEventListener("load", function() {
+				FastClick.attach(document.body);
+			}, false);
+		
+		</script>
+	</body>
+
+</html>

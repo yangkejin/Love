@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../lib/iscroll/iscroll-probe.js"></script>
+		<script src="../../../lib/jquery-3.3.1.min.js"></script>
+		<link href="../../../css/reset.css" rel="stylesheet" />
+
+		<script src="../../../lib/vue.min.js"></script>
+		<script src="../../../lib/data/shui/Datas.js"></script>
+		<script src="../../../lib/data/shui/URLs.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+
+		<link href="../../../lib/datepicker/mui.picker.min.css" rel="stylesheet" />
+		<script src="../../../lib/datepicker/mui.picker.min.js"></script>
+
+		<link href="../../../lib/datepicker/mui.dtpicker.css" rel="stylesheet" />
+		<script src="../../../lib/datepicker/mui.dtpicker.js"></script>
+
+		<link href="../../../css/shui/ManualMonitoringQuery/section_select.css" rel="stylesheet" />
+		<script src="../../../lib/fastclick.js"></script>
+
+		<style type="text/css">
+			.water_content {
+				top: 50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<span id="header_title">断面选择</span>
+			<div id="back_v" class="back_v">
+				<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+			<!-- <div id="none_v" class="none_v">
+				完成
+			</div> -->
+		</div>
+		<div class="content">
+			<!-- 已选择 -->
+			<!-- <div class="chosen_header">
+				<span>已选择</span>
+			</div>
+			<ul class="chosen_ul">
+				<li class="chosen_li" v-for="(item,index) in selectData" @click="delItem(item, index)">
+					<span>{{item.Name}}</span>
+					<img width="10px" height="10px" src="../../../img/shui/CancelSelection.png" />
+				</li>
+			</ul> -->
+			<!-- 断面选择 -->
+			<!-- <div class="select_header">
+				<span>断面选择</span>
+			</div> -->
+
+			<!-- <ul class="water_ul">
+				<li class="water_li">
+					<p>潮百河水系</p>
+				</li>
+				<li class="water_li">
+					<p>潮百河水系</p>
+				</li>
+				<li class="water_li">
+					<p>潮百河水系</p>
+				</li>
+				<li class="water_li">
+					<p>潮百河水系</p>
+				</li>
+				<li class="water_li">
+					<p>潮百河水系</p>
+				</li>
+				<li class="water_li"> 
+					<p>潮百河水系</p>
+				</li>
+			</ul> -->
+
+			<div class="water_content">
+				<div class="water_content_left">
+					<ul class="water_left">
+						<li v-for="(item,index) in ExtensionData" v-bind:style="bindBgColor(item.isSelect)" @click="selectLeftItem(item, index)">{{item.TypeName}}</li>
+					</ul>
+				</div>
+
+				<div class="water_content_right">
+					<ul class="water_right">
+						<li class="water_right_li" v-for="(item,index) in Sections" @click="selectRightItem(item, index)" row="0" value="苏庄桥"
+						 isSelect="false">
+							<span>{{item.Name}}</span>
+							<div id="img0" v-bind:style="bindImgSrc(item)"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../../../js/shui/ManualMonitoringQuery/section_select_v2.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			window.addEventListener("load", function() {
+				FastClick.attach(document.body);
+			}, false);
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.back();
+			});
+		</script>
+	</body>
+
+</html>

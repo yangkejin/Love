@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script src="lib/tool/DateTool.js"></script>
+
+		<script type="text/javascript" charset="utf-8" src="lib/data/Datas.js"></script>
+		<script type="text/javascript" charset="utf-8" src="lib/data/Internet.js"></script>
+		<script type="text/javascript" charset="utf-8" src="lib/data/StorageTool.js"></script>
+		<script type="text/javascript" charset="utf-8" src="lib/data/URLs.js"></script>
+		<script type="text/javascript" charset="utf-8" src="lib/data/webSQLTool.js"></script>
+
+		<script src="js/muiBack.js" type="text/javascript" charset="utf-8"></script>
+
+		<style type="text/css">
+			body {
+				width: 100%;
+				height: 100%;
+			}
+			
+			body {
+				text-align: center;
+				font-size: 15px;
+				background-color: lightgray;
+			}
+			
+			body,
+			div,
+			li,
+			ul {
+				margin: 0px;
+				padding: 0px;
+				border: 0;
+			}
+			
+			.mui-content {
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0);
+			}
+			
+			.icon {
+				width: 80px;
+				height: 100%;
+			}
+			
+			.iconContent {
+				position: relative;
+				top: 30px;
+				height: 80px;
+			}
+			
+			.content {
+				position: relative;
+				width: 90%;
+				background-color: white;
+				margin-left: 5%;
+				border-radius: 5px;
+				top: 50px;
+			}
+			
+			ul {
+				height: 100%;
+			}
+			
+			li {
+				height: 60px;
+				line-height: 60px;
+				text-align: left;
+				list-style: none;
+			}
+			
+			#password_img,
+			#user_img {
+				width: 20px;
+				height: 20px;
+				float: left;
+				margin-left: 10px;
+				margin-top: 20px;
+			}
+			
+			#eye_img {
+				width: 20px;
+				height: 20px;
+				position: absolute;
+				bottom: 20px;
+				right: 10px;
+			}
+			
+			#userName,
+			#password {
+				width: 70%;
+				border: 0;
+				margin-top: 10px;
+				margin-left: 0;
+			}
+			
+			button {
+				width: 90%;
+				height: 40px;
+				font-size: 18px;
+				position: relative;
+				top: 70px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="iconContent">
+			<img class="icon" src="img/app_icon.png" />
+		</div>
+		<div class="mui-content">
+			<div class="content">
+				<ul>
+					<li style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+						<img id="user_img" src="img/login_user.png" />
+						<input id='userName' type="text" class="mui-input" placeholder="请输入账号">
+					</li>
+					<li>
+						<img id="password_img" src="img/login_password.png" />
+						<input id='password' type="password" class="mui-input" placeholder="请输入密码">
+						<img id="eye_img" src="img/eye_close.png" />
+					</li>
+				</ul>
+			</div>
+			<button id="login" type="button" class="mui-btn mui-btn-primary">登陆</button>
+		</div>
+
+	</body>
+
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			plus.navigator.setStatusBarBackground("#d3d3d3");
+		});
+		mui.init();
+		mui.ready(function() {
+			document.getElementById("eye_img").addEventListener("tap", function() {
+				var password = document.getElementById("password");
+				var eye_img = document.getElementById("eye_img");
+				if(password.type == "text") {
+					password.type = "password";
+					eye_img.src = "img/eye_close.png";
+				} else {
+					password.type = "text";
+					eye_img.src = "img/eye_active.png";
+				}
+			});
+		});
+		var input_userName = document.getElementById("userName");
+		var input_password = document.getElementById("password");
+		mui.plusReady(function() {
+			input_userName.value = plus.storage.getItem("userName");
+			input_password.value = plus.storage.getItem("password");
+		})
+
+		function login() {
+			plus.nativeUI.showWaiting("正在登陆...", {
+				back: 'none'
+			});
+			var data = new Datas();
+			var userName = input_userName.value;
+			var password = input_password.value;
+			data.login(userName, password, function(json) {
+				plus.nativeUI.closeWaiting();
+				if(json) {
+					if(json.Data.Success) {
+						plus.storage.setItem("userName", userName);
+						plus.storage.setItem("password", password);
+						plus.storage.setItem("isAuto", "true");
+						plus.storage.setItem("loginTime",new Date().Format("yyyy-MM-dd hh:mm:ss"));
+						mui.plusReady(function() {
+							setTimeout(function() {
+								plus.webview.currentWebview().close();
+							}, 500);
+						})
+						mui.openWindow({
+							url: 'index.html',
+							id: 'index',
+							createNew: true,
+							waiting: {
+								title: '正在跳转...',
+							}
+						});
+						
+
+					} else {
+						plus.nativeUI.toast(json.Data.Error);
+					}
+				} else {
+					plus.nativeUI.toast("登陆错误！");
+				}
+			}, function(e) {
+				plus.nativeUI.closeWaiting();
+
+			}, function(e) {
+				plus.nativeUI.closeWaiting();
+
+			});
+		}
+
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			if(!self.isLogout) {
+				if(plus.storage.getItem("isAuto") == "true") {
+					login();
+				}
+			}
+			document.getElementById("login").addEventListener("tap", function() {
+				login();
+			});
+		})
+	</script>
+
+</html>

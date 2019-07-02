@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../lib/vue.min.js"></script>
+		<style type="text/css">
+			body,
+			div,
+			ul,
+			li,
+			img,
+			span {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			body {
+				font-size: 15px;
+			}
+			.mui-scroll-wrapper {
+				top: 45px;
+				background-color: lightgrey;
+			}
+			li {
+				margin: 10px;
+				list-style: none;
+			}
+			
+			li .left {
+				float: left;
+				width: 100px;
+				display: inline-block;
+			}
+			
+			li .right {
+				float: left;
+				display: inline-block;
+				width:-webkit-calc(100% - 100px);
+				padding-bottom: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">系统说明</h1>
+		</header>
+		<script type="text/javascript">
+			
+		</script>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="ul">
+						<li v-for="item in list"> 
+							<div class="left">
+								{{item.left}}
+							</div>
+							<div class="right">
+								{{item.right}}
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<script type="text/javascript">
+			mui.init();
+			mui('.mui-scroll-wrapper').scroll();
+			
+			mui.ready(function () {
+			   		var app = new Vue({
+			   			el:".ul",
+			   			data:{
+			   				list:[]
+			   			}
+			   		});
+			   		app.list = [{
+			   			left:"1.发布依据：",
+			   			right:"根据《环境空气质量标准》（GB 3095-2012)和《环境空气质量标准（AQI)技术规定（试行）》（HJ633-2012）的有关规定，发布我市空气质量状况。"
+			   		},{
+			   			left:"2.发布内容：",
+			   			right:"包括评价时段、监测点位名称及位置、各监测项目的浓度、空气质量分指数、空气质量指数、首要污染物及空气质量级别。"
+			   		},{
+			   			left:"3.发布指标：",
+			   			right:"城市发布指标：城市日空气质量指数（AQI）、城市小时空气质量指数（AQI）以及相应的空气质量级别、首要污染物等。\r\n点位发布指标：发布点位二氧化硫（SO2）、二氧化碳（NO2）、一氧化碳（CO）、臭氧（O3）、颗粒物（PM10）、颗粒物（PM2.5）的1小时浓度平均值及其对应的空气质量指数（AQI）。\r\n空气质量指数AQI的计算方法详见《环境空气质量指数（AQI）技术规定（试行）》（HJ633-2012）。\r\n颗粒物1小时浓度的AQI分级浓度限值参照24小时浓度的AQI分级浓度限值。\r\n监测点位1小时浓度平均值指该点位1小时内所测项目的算术平均值或测量值，如16时的小时均值为16:00 1个小时的算术平均值或测量值。"
+			   		},{
+			   			left:"4.数据来源：",
+			   			right:"来源于我市空气质量监测点位。"
+			   		},{
+			   			left:"5.其他说明：",
+			   			right:"发布结果通常为每小时更新1次，由于数据传输需要一定的时间，发布的数据约有半小时延滞。例如15时的监测数据在15:30左右发布。当遇到监测仪器校零、校标等日常维护行为，或出现通信故障、停电等现象，某些站点会出现一段时间内无数据的情况。"
+			   		},{
+			   			left:"6.特别说明：",
+			   			right:"根据《环境空气质量指数(AQI)技术规定(试行)》(HJ633-2012)的要求，实时发布数据由发布系统进行初步审核，所发布小时数据及日数据仅为当天参考值，用于向公众提供健康指引，不直接用于空气质量达标状况的评价。评价空气质量达标状况时，应依据《环境空气质量标准》(GB 3095-2012)中的规定进行。"
+			   		}];
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,314 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	font-size: 13px;
+	background-color: white;
+}
+
+.content {
+	width: 100%;
+	height: 100%;
+}
+
+body,
+div,
+ul,
+li,
+input {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.header {
+	height: 49px;
+	line-height: 49px;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+	color: white;
+	background-color: #2a68cd;
+}
+
+.header>.back_v {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	width: 50px;
+}
+
+.title {
+	height: 44px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	font-size: 0;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+.page_content {
+	text-align: center;
+	position: relative;
+	top: 10px;
+}
+
+#page {
+	position: relative;
+	display: inline-block;
+}
+
+
+/* 填报 */
+#report {
+	position: fixed;
+	width: 100%;
+	height: -webkit-calc(100% - 100px);
+	overflow: scroll;
+	top: 100px;
+	display: block;
+}
+
+.item {
+	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.item_name {
+	display: inline-block;
+	text-align: center;
+	width: 90px;
+}
+
+.mui-input {
+	display: inline-block;
+	width: -webkit-calc(100% - 100px) !important;
+	height: 20px !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	margin-left: 10px;
+}
+
+.item_left,
+.item_right {
+	width: 48%;
+	display: inline-block;
+}
+
+.item_r {
+	display: inline-block;
+	width: -webkit-calc(100% - 100px) !important;
+	height: 20px;
+	text-align: right;
+}
+
+.item_r input {
+	text-align: right;
+}
+
+.deal textarea {
+	width: -webkit-calc(100% - 10px);
+	margin-right: 10px;
+	height: 100px;
+}
+
+.photo {
+	width: 100%;
+	height: 250px;
+}
+
+.photo_content {
+	width: 100%;
+	height: 90%;
+	overflow: hidden;
+}
+
+#add_photo, .photo_item{
+	width: 23%; 
+	height: 46%; 
+	display: inline-block;
+	background-color: white;
+	border-radius: 5px;
+	margin: 1%;
+}
+
+#add_photo {
+	border: 1px solid lightgray;
+}
+
+.photo_item {
+	float: left;
+	position: relative;
+}
+
+#add_img {
+	width: 100%;
+	height: 100%;
+}
+
+#img {
+	width: 100%;
+	height: 100%;
+} 
+
+.cancel_photo {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 0px;
+}
+
+#submit_btn {
+	margin-left: 5%;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	width: 90%;
+	height: 40px;
+	font-size: 18px;
+}
+
+
+
+
+/* 查询 */
+#inquire {
+	position: fixed;
+	width: 100%;
+	top: 100px;
+	display: none;
+}
+
+#search_btn {
+	display: inline-block;
+	height: 28px;
+	padding: 0;
+	margin: 8px;
+	margin-left: 5px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.select_search {
+	position: relative;
+	height: auto;
+}
+
+.select_search_itme {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	display: inline-block;
+}
+
+label {
+	margin-left: 5px;
+}
+
+.header_btn {
+	display: inline-block;
+	border: 1px solid #63baf0;
+	border-radius: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 10px;
+}
+
+.time_select {
+	display: inline-block;
+	border-radius: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 10px;
+}
+
+.date_content {
+	margin-top: 16px;
+	position: relative;
+}
+
+.page_content {
+	margin-top: 8px;
+}
+
+.date_btn {
+	position: relative;
+	display: inline;
+	border: 1px solid #63baf0;
+	border-radius: 5px;
+	padding: 7px;
+}
+
+/* .table_content {	
+	height: 300vh;
+	overflow: scroll;
+	text-align: center;
+}
+
+table {
+	overflow: scroll;
+}
+
+.table { 
+	width: 100vw;
+	height: 300vh;
+	overflow: scroll;
+}
+
+.table th {
+	text-align: center;
+	white-space: wrap;
+	width: 15vw;
+	padding: 5px;
+	background-color: #ecf4f8;
+}
+
+.table td {
+	text-align: center;
+	white-space: wrap;
+	padding: 5px;
+}
+ */
+
+.table_content {
+	text-align: center;
+/* 	position: absolute;
+	top: 0;
+	bottom: 0;
+	height: auto;
+	width: 100%; */
+}
+
+.table {
+	overflow: scroll;
+	/* position: absolute;
+	top: 100px;
+	bottom: 0;
+    height: auto;
+	width: auto; */
+} 
+
+/* table {
+	position: relative;
+	overflow:scroll;
+} */
+
+.table th {
+	text-align: center;
+	white-space: nowrap;
+	padding: 5px;
+	background-color: #ecf4f8;
+}
+
+.table td {
+	text-align: center;
+	white-space: nowrap;
+	padding: 5px;
+}

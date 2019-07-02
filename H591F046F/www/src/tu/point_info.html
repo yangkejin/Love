@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/daqi/reset.css" rel="stylesheet" />
+		<script src="../../lib/iscroll/iscroll-probe.js"></script>
+		<script src="../../lib/vue.min.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+
+		<script src="../../lib/data/tu_Datas.js"></script>
+		<script src="../../lib/data/Internet.js"></script>
+		<script src="../../lib/data/StorageTool.js"></script>
+		<script src="../../lib/data/tu_URLs.js"></script>
+		<script src="../../lib/data/webSQLTool.js"></script>
+
+		<script src="../../lib/fastclick.js"></script>
+		<script src="../../lib/mui.lazyload.js"></script>
+		<script src="../../lib/mui.lazyload.img.js"></script>
+
+		<link href="../../css/tu/point_info.css" rel="stylesheet" />
+
+		<style type="text/css">
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<span id="header_title">点位详情</span>
+			<div id="back_v" class="back_v">
+				<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+		</div>
+		<div class="popu_list">
+			<div class="popu_list_content">
+				<div class="colse">
+					<img src="../../img/tu/colse.png" />
+				</div>
+
+				<ul class="popu_list_ul" id="popu_list_ul">
+					<!--<li class="popu_list_item" v-for="(item, index) in list">
+						<div v-on:click="itemClick(item,index,$event)">
+							<p :id="index" class="STATIONCODE">采样编号：{{item.STATIONCODE}}</p>
+							<p id="SAMPLEDEPTH_{{index}}">采样深度(cm)：{{item.SAMPLEDEPTH}}</p>
+							<div id="img">
+							</div>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<div id="wrapper">
+			<div id="scroller">
+				<div class="item point_info">
+					<p>点位编码：{{dic.STATIONCODE}}</p> 
+					<p>点位类别：{{dic.STATIONTYPE}}</p>  
+					<!--<p>点位种类：背景点</p>
+					<p>所属区域：北京市顺义木林镇西付村</p>-->
+					<p>地理位置：{{dic.ADDRESS}}</p>
+					<p><span>理论经度：{{dic.LONGITUDE}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>理论纬度：{{dic.LATITUDE}}</span></p>
+					<!--					<p><span>自动定位经度：116.55E</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>自动定位纬度：23.68N</span></p>
+-->
+					<p>创建时间：{{dic.CREATETIME}}</p> 
+					<p>监测项目：{{dic.ITEMNAME}}</p>
+
+				</div>
+
+				<div class="item">
+					<div class="number_btn">
+						<span>采样编号：</span>
+						<span id="sample_code">440815010093S</span>
+						<img src="../../img/tu/down_blue.png" width="10px" />
+					</div>
+					<div class="sampling">
+						<div class="title">
+							<div class="fangkuai">
+							</div>
+							<span>采样信息</span>
+						</div>
+						<p>采样时间：{{dic.SAMPLETIME}}</p>
+						<p>天气情况：{{dic.WEATHERCONDITION}}</p>
+						<p>采样地点：{{dic.ADDRESS}}</p>
+						<p>理论经度：{{dic.THEORYLON}}；理论纬度：{{dic.THEORYLAT}}</p>
+						<p>自动定位经度：{{dic.AUTOLOCATLON}}；自动定位纬度：{{dic.AUTOLOCATLAT}}</p>
+						<p>土壤类型：{{dic.SOILTYPE}}</p>
+						<p>土地利用类型：{{dic.SOILUSETYPE}}</p>
+						<p>土壤湿度：{{dic.SOILHUMIDITY}}</p>
+						<p>采样深度(cm)：{{dic.SAMPLEDEPTH}}</p>
+						<p>样品重量(g)：{{dic.SAMPLEWIGTH}}</p>
+						<p>采样人员：{{dic.SAMPLEPERSON}}</p>
+						<p>联系方式：{{dic.LINKWAY}}</p>
+						<p>采样点周边信息描述（1000m）：</p>
+						<p>{{dic.REMARK}}</p>
+						<p>八方图：</p>
+						<div class="poto">
+							<div class="poto_item">
+								<img id="BEFORE_PICTURE" src="../../img/tu/default_poto.png" v-bind:src="BEFORE_PICTURE()"/>
+								<span>采样前快照</span>
+							</div>
+							<div class="poto_item">
+								<img id="AROUNDN" src="../../img/tu/default_poto.png" v-bind:src="AROUNDN()"/>
+								<span>北方快照</span>
+							</div>
+							<div class="poto_item">
+								<img id="AFTER_PICTURE" src="../../img/tu/default_poto.png" v-bind:src="AFTER_PICTURE()"/>
+								<span>采样后快照</span>
+							</div>
+							<div class="poto_item">
+								<img id="AROUNDW" src="../../img/tu/default_poto.png" v-bind:src="AROUNDW()"/>
+								<span>西方快照</span>
+							</div>
+							<div class="poto_item">
+								<img id="CURRENT_PICTURE" src="../../img/tu/default_poto.png" v-bind:src="CURRENT_PICTURE()"/>
+								<span>采样点近照</span>
+							</div>
+							<div class="poto_item">
+								<img id="AROUNDE" src="../../img/tu/default_poto.png" v-bind:src="AROUNDE()"/>
+								<span>东方快照</span>
+							</div>
+							<div class="poto_item">
+								<img id="SELFIE_PICTURE" src="../../img/tu/default_poto.png" v-bind:src="SELFIE_PICTURE()"/>
+								<span>自拍快照</span>
+							</div>
+							<div class="poto_item">
+								<img id="AROUNDS" src="../../img/tu/default_poto.png" v-bind:src="AROUNDS()"/>
+								<span>南方近照</span>
+							</div>
+							<div class="poto_item">
+								<img id="MORE_PICTURE" src="../../img/tu/default_poto.png" v-bind:src="MORE_PICTURE()"/>
+								<span>更多快照</span>
+							</div>
+						</div>
+					</div>
+					<div class="monitoring_data">
+						<div class="title">
+							<div class="fangkuai">
+							</div>
+							<span>监测数据</span>
+						</div>
+						<p v-for="item in list">{{item.MONITORITEMNAME}}：{{item.MONITORVALUE}}</p>
+
+					</div>
+					<div class="circulation_record">
+						<div class="title"> 
+							<div class="fangkuai">
+							</div>  
+							<span>流转记录</span>
+						</div>
+						<div v-for="(item, index) in list" style="border-radius: 6px;box-shadow: 0 0 6px #ddd;-webkit-box-shadow: 0 0 6px #ddd;padding: 8px;margin-top: 8px;">
+							<p><img src="../../img/tu/jilu.png" width="14px"/><span style="color:#2a68cd;margin-left: 4px;">记录{{index+1}}</span></p>
+							<p>当前节点：{{item.CURRENTNODE}}</p>
+							<p>样品重量是否符合要求：<span v-if="item.WIGTHISREQUIRED == 1">是</span> <span v-else>否</span>&nbsp;&nbsp;<span>{{item.REMARK_WIGTHISREQUIRED}}</span></p>
+							<p>样品瓶/袋是否完好：<span v-if="item.BOTTLEISPERFECT == 1">是</span> <span v-else>否</span>&nbsp;&nbsp;<span>{{item.REMARK_BOTTLEISPERFECT}}</span></p>
+							<p>标签是否完好整洁：<span v-if="item.LABELISNEAT == 1">是</span> <span v-else>否</span>&nbsp;&nbsp;<span>{{item.REMARK_LABELISNEAT}}</span></p>
+							<p>保存方式：{{item.SAVEWAY}}</p>
+							<p>交接时间：{{item.TRANSFERTIME}}</p>
+							<p>送样单位：{{item.DELIVERAPARTMENT}}</p>
+							<p>送样人：{{item.DELIVERPERSON}}</p>
+							<p>接收单位：{{item.RECEIVEAPARTMENT}}</p>
+							<p>接收人：{{item.RECEIVEPERSON}}</p>
+						</div>
+					</div>
+				</div>
+				</br>
+			</div>
+		</div>
+		<script src="../../js/tu/point_info.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			window.addEventListener("load", function() {
+				FastClick.attach(document.body);
+			}, false);
+		</script>
+	</body>
+
+</html>

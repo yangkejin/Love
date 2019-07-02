@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+
+		<link href="../../css/daqi/analysis.css" rel="stylesheet" />
+
+		<script src="../../lib/iscroll/iscroll-probe.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+
+		<script src="../../lib/tool/upDropDownMenu.js" ></script>
+		<script src="../../lib/fastclick.js" ></script>
+		<script src="../../lib/vue.min.js" ></script>
+
+		<script  src="../../lib/data/Datas.js"></script>
+		<script  src="../../lib/data/Internet.js"></script>
+		<script  src="../../lib/data/StorageTool.js"></script>
+		<script  src="../../lib/data/URLs.js"></script>
+		<script  src="../../lib/data/webSQLTool.js"></script>
+
+		<script src="../../lib/UpDownRefresh/UpDownRefresh.js"></script>
+		<link href="../../lib/UpDownRefresh/UpDownRefresh.css" rel="stylesheet" />
+
+		<link href="../../lib/datepicker/mui.picker.min.css" rel="stylesheet" />
+		<script src="../../lib/datepicker/mui.picker.min.js" ></script>
+
+		<link href="../../lib/datepicker/mui.dtpicker.css" rel="stylesheet" />
+		<script src="../../lib/datepicker/mui.dtpicker.js" ></script>
+
+		<link href="../../css/daqi/nulldata.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+		<div class="header1">
+				<span id="header_title">数据分析</span>
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+		</div>
+		<div class="header">
+			<div id="one_btn" class="header_btn">
+				<span id="one_btn_text">日报</span>
+				<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+			</div>
+			<!-- <div id="city_btn" class="header_btn">
+				<span id="city_btn_text">顺义区</span>
+				<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+			</div> -->
+			<div id="startTime_btn" class="header_btn">
+				<span id="startTime_btn_text">2018/7</span>
+				<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+			</div>
+			<span>~</span>
+			<div id="endTime_btn" class="three header_btn">
+				<span id="endTime_btn_text">2018/7</span> 
+				<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+			</div>
+		</div>
+		<div class="title">
+			<ul>
+				<li>类型</li> 
+				<li>项目</li>
+				<li>时间</li>
+				<li>操作</li> 
+			</ul>
+		</div>
+		
+		<div id="wrapper">
+			<div id="scroller">
+				<ul id="scroller_ul">
+					<div id="nullData">
+						<div>
+							<img width="80px" height="60px" src="../../img/daqi/kong_null_data_g.png"/>
+						</div>
+						<span>暂无数据!</span>
+					</div>
+					<ul class="item" v-for="(item,index) in list">
+						<li class="rank">{{item.TYPE}}</li>
+						<li>{{item.StationName}}</li>
+						<li>
+							<div class="value">{{item.TIMEPOINT}}</div>
+						</li>
+						<li><button id="btn" type="button" v-on:click="Preview(item.ID)">预览</button></li>
+					</ul>
+				</ul>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			// mui.plusReady(function() {
+			// 	plus.navigator.setStatusBarBackground("#FFFFFF");
+			// });
+			mui.init({
+				keyEventBind: {
+					backbutton: false,
+					menubutton: false
+				},
+			})
+			window.addEventListener("load", function() {
+				FastClick.attach(document.body);
+			}, false);
+
+		</script>
+				<script src="../../js/daqi/comm.js" ></script>
+
+		<script src="../../js/daqi/analysis.js" ></script>
+	</body>
+
+</html>

@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+		<style type="text/css">
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+			
+			body {
+				font-size: 15px;
+			}
+			
+			body,
+			div,
+			img,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			
+			.header {
+				width: 100%;
+				height: auto;
+				background-image: url(../../img/daqi/my_bg.png);
+				background-repeat: no-repeat;
+				-webkit-background-size: 100% 100%;
+			}
+			
+			.user {
+				display: inline-block;
+				height: 60px;
+				position: relative;
+				left: 20px;
+				top: 20px;
+			}
+			
+			.avatar {
+				display: inline-block;
+			}
+			
+			.user_avatar {
+				float: left;
+				height: 60px;
+				line-height: 60px;
+				display: inline-block;
+			}
+			
+			.user_name {
+				height: 60px;
+				line-height: 60px;
+				display: inline-block;
+				margin-left: 16px;
+				font-size: 18px;
+			}
+			
+			#time {
+				margin-top: 70px;
+				margin-left: 20px;
+				padding-bottom: 10px;
+				color: white;
+			}
+			
+			li {
+				height: 50px;
+				list-style: none;
+			}
+			
+			.li_content {
+				padding: 10px;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+			}
+			
+			.li_content_img {
+				position: relative;
+				top: 7.5px;
+			}
+			
+			.li_content_text {
+				display: inline-block;
+			}
+			
+			button {
+				margin-top: 40px;
+				width: 70%;
+				height: 40px;
+				background-color: #63baf0;
+				color: white;
+				margin-left: 15%;
+			}
+			
+			.bottom_title {
+				text-align: center;
+				width: 100%;
+				position: absolute;
+				bottom: 12px;
+			}
+			
+			#modal {
+				background-color: rgba(0,0,0,.5);
+				text-align: center;
+			}
+			
+			.modal_content {
+				padding: 10px;
+				display: inline-block;
+				width: 200px;
+				border-radius: 10px;
+				background-color: white;
+				margin: auto;
+				position: relative;
+				top: -webkit-calc(50% - 65px);
+			}
+			
+			.top {
+				width: 100%;
+				font-size: 0;
+				position: relative;
+			}
+			
+			.icon {
+				display: inline-block;
+				float: left;
+			}
+			.sys_info {
+				width: -webkit-calc(100% - 50px);
+				display: inline-block;
+				text-align: center;
+				font-size: 15px;
+			}
+			
+			#app_name {
+				width: 100%;
+				display: inline-block;
+				word-wrap : break-word;
+				font-size: 17px;
+			}
+			
+			#version {
+				margin-top: 5px;
+			}
+			
+			.bottom {
+				width: 100%;
+				margin-top: 10px;
+				text-align: center;
+				font-size: 12px;
+			}
+			.bottom>.issued,.bottom>.technical_support {
+				width: 100%;
+				word-wrap : break-word
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="user">
+				<div class="user_avatar">
+					<img class="avatar" width="60px" height="60px" src="../../img/daqi/my_image.png" />
+				</div>
+				<div class="user_name">TestUser</div>
+			</div>
+			<div id="time">
+				登陆时间：
+			</div>
+		</div>
+
+		<ul class="list">
+			<li value="0">
+				<div class="li_content">
+					<img class="li_content_img" width="30px" height="30px" src="../../img/daqi/aqi_des.png" />
+					<div class="li_content_text">
+						空气污染级别说明
+					</div>
+				</div>
+			</li>
+			<li value="1">
+				<div class="li_content">
+					<img class="li_content_img" width="30px" height="30px" src="../../img/daqi/sys_des.png" />
+					<div class="li_content_text">
+						系统说明
+					</div>
+				</div>
+			</li>
+			<li value="2">
+				<div class="li_content">
+					<img class="li_content_img" width="30px" height="30px" src="../../img/daqi/about_me.png" />
+					<div class="li_content_text">
+						关于我们
+					</div>
+				</div>
+			</li>
+		</ul>
+
+		<button type="button" id="Logout_btn">注销</button>
+
+		<div class="bottom_title">
+			广东旭诚科技有限公司
+		</div>
+
+		<div id="modal" class="mui-modal">
+			<div id="modal_content" class="modal_content">
+				<div class="top">
+					<img class="icon" width="50px" height="50px" src="img/app_icon.png"/>
+					<div class="sys_info">
+						<div id="app_name">
+						</div>
+						<div id="version">
+						</div>
+					</div>
+			</div>
+			<div class="bottom">
+				<div class="issued">
+					
+				</div>
+				<div class="technical_support">
+					技术支持：广东旭诚科技有限公司
+				</div>
+			</div>
+		</div>
+		</div>
+
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground("#d2eff8");
+				document.getElementById("time").innerText = "登陆时间：" + plus.storage.getItem("loginTime");
+				document.getElementsByClassName("user_name")[0].innerText = plus.storage.getItem("userName");
+				var appName = document.getElementById("app_name");
+				var version = document.getElementById("version");
+				plus.runtime.getProperty(plus.runtime.appid, function(wgtinfo) {
+					appName.innerText = wgtinfo.name;
+					version.innerText = "Version:" + wgtinfo.version;
+				});
+			});
+			mui.init();
+			mui('.list').on('tap', 'li', function(e) {
+				var value = this.getAttribute('value');
+				if(value == 0) {
+					mui.openWindow({
+						url: 'set/AirPollutionLevelDescription.html',
+						waiting: {
+							title: '正在跳转...',
+						}
+					});
+				} else if(value == 1) {
+					mui.openWindow({
+						url: 'set/instructions.html',
+						waiting: {
+							title: '正在跳转...',
+						}
+					});
+				} else {
+					document.querySelector(".mui-modal").classList.add("mui-active");
+				}
+			});
+
+			document.getElementById("modal").addEventListener("click", function() {
+				document.querySelector(".mui-modal").classList.remove("mui-active");
+			});
+
+			document.getElementById("modal_content").addEventListener("touchend", function(e) {
+				e.preventDefault();
+			});
+
+			document.getElementById("Logout_btn").addEventListener("tap", function() {
+				mui.openWindow({
+					url: 'login.html',
+					extras: {
+						isLogout: true
+					},
+					waiting: {
+						title: '正在跳转...',
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

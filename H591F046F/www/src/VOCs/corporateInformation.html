@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<script src="../../js/mui.js"></script>
+		<script src="../../lib/tool/upDropDownMenu.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		<link href="../../css/VCOs/corporateInformation.css" rel="stylesheet"/> 
+		
+		<script src="../../lib/data/VOCs/URLs.js"></script>
+		<script src="../../lib/data/VOCs/Datas.js"></script>
+		<script src="../../lib/data/Internet.js"></script>
+		<script src="../../lib/data/StorageTool.js"></script>
+		<script src="../../lib/data/webSQLTool.js"></script>
+	
+		<script src="../../lib/tool/DateTool.js"></script>
+		<script src="../../lib/vue.min.js"></script>
+	</head> 
+
+	<body>
+		<div class="content">
+			<div class="header">
+				<span id="header_title">企业信息</span>
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+			</div>
+			<div class="select_search">
+				<div class="select_search_itme">
+					<label>企业类型:</label>
+					<div id="corporate_type_btn" class="header_btn">
+						<span id="corporate_type_btn_text">==ALL==</span>
+						<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+					</div>
+				</div>
+				<div class="select_search_itme">
+					<label class="keyword_search">关键字搜索:</label>
+					<input id='search_input' type="text" class="mui-input" placeholder="">
+				</div>
+				<button id="search_btn" type="button" class="mui-btn mui-btn-primary">查询</button>
+			</div>
+
+			<div class="table_content">
+				<div class="table">
+					<table border="1">
+						<tr>
+							<th>企业名称</th>
+							<th>企业类型</th>
+							<th>编号</th>
+							<th>联系人</th>
+							<th>电话</th>
+							<th>建立时间</th>
+							<th>经度</th>
+							<th>纬度</th>
+							<th>地址</th>
+						</tr>
+						<tr  v-for="(item,index) in list">
+							<td>{{item.ENTERPRISENAME}}</td>
+							<td v-html="getENTERPRISETYPE(item.ENTERPRISETYPE)"></td>
+							<td>{{item.REPORTNO}}</td>
+							<td>{{item.CONTRACT}}</td>
+							<td>{{item.TELEPHONE}}</td>
+							<td v-html="getTimePoint(item.BUILDTIME)"></td>
+							<td>{{item.LONGITUDE}}</td>
+							<td>{{item.LATITUDE}}</td>
+							<td>{{item.ADDRESS}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/VOCs/comm.js"></script>
+		<script src="../../js/VOCs/corporateInformation.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+		</script>
+	</body>
+
+</html>

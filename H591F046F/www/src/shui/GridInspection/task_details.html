@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../../js/mui.min.js"></script>
+		<link href="../../../css/daqi/reset.css" rel="stylesheet" />
+		<script src="../../../lib/iscroll/iscroll-probe.js"></script>
+		<script src="../../../lib/jquery-3.3.1.min.js"></script>
+		<link href="../../../css/shui/GridInspection/task_details.css" rel="stylesheet" />
+
+		<script src="../../../lib/vue.min.js"></script>
+		<script src="../../../lib/data/shui/Datas.js"></script>
+		<script src="../../../lib/data/shui/URLs.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+
+		<script src="../../../lib/fastclick.js"></script>
+
+		<script src="../../../lib/UpDownRefresh/UpDownRefresh.js"></script>
+		<link href="../../../lib/UpDownRefresh/UpDownRefresh.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="header">
+			<span id="header_title">任务详情</span>
+			<div id="back_v" class="back_v">
+				<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+		</div>
+		<div id="wrapper">
+			<div id="scroller">
+				<ul id="scroller_ul">
+					<li class="item event_reminder_item">
+						<ul class="process_list clearfloat">
+							<div v-for="(item,index) in WorkFlowTaskList">
+								<li>
+									<img width="20px" v-bind:src="getProcessImg(item)" />
+									<p class="balck">{{item.TaskName}}</p>
+									<p class="balck">{{item.ProcessUserId}}</p>
+									<p class="balck">{{item.ProcessStartTime}}</p>
+								</li>
+								<img class="jiantou" src="../../../img/On-site_monitoring/shui/jiantou.png" width="30px" v-bind:style="isShow(index)" />
+							</div>
+						</ul>
+						<div class="line">
+							<img src="../../../img/On-site_monitoring/shui/info.png" width="25px" />
+							<span>任务信息</span>
+						</div>
+						<div class="line">
+							<div class="line_content">
+								<div class="line_content_item">
+									<p>巡检任务名称</p>
+									<p class="balck">{{GDTaskDetail.TaskName}}</p>
+								</div>
+								<div class="line_content_item">
+									<p>巡检地点</p>
+									<p class="balck">{{GDTaskDetail.DetailedAddress}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="line">
+							<div class="line_content">
+								<div class="line_content_item">
+									<p>任务类型</p>
+									<p class="balck">{{GDTaskDetail.TaskType}}</p>
+								</div>
+								<!-- <div class="line_content_item">
+									<p>事件名称</p>
+									<p class="balck">{{TaskDetail.RiverSectionName}}</p>
+								</div> -->
+							</div>
+						</div>
+						<div class="line">
+							<div class="line_content">
+								<div class="line_content_item">
+									<p>创建任务人</p>
+									<p class="balck">{{GDTaskDetail.CreateUser}}</p>
+								</div>
+								<div class="line_content_item">
+									<p>网格</p>
+									<p class="balck">{{GDTaskDetail.Grid}}</p>
+								</div>
+								<div class="line_content_item">
+								</div>
+							</div>
+						</div>
+						<div class="line">
+							<div class="line_content">
+								<div class="line_content_item">
+									<p>指派任务时间</p>
+									<p class="balck">{{GDTaskDetail.IssueTime}}</p>
+								</div>
+								<div class="line_content_item">
+									<p>任务截止时间</p>
+									<p class="balck">{{GDTaskDetail.TaskDeadLine}}</p>
+								</div>
+								<div class="line_content_item">
+								</div>
+							</div>
+						</div>
+						<div class="line">
+							<p>建议排查企业</p>
+							<p class="balck">{{GDTaskDetail.PollutionSourceNames}}</p>
+						</div>
+						<div class="line">
+							<div class="line_content">
+								<div class="line_content_item">
+									<p>任务节点</p>
+									<p class="balck">{{GDTaskDetail.TaskStepName}}</p>
+								</div>
+								<div class="line_content_item">
+									<p>当前处理人</p>
+									<p class="balck">{{GDTaskDetail.CurrentUserName}}</p>
+								</div>
+								<div class="line_content_item">
+								</div>
+							</div>
+						</div>
+						<div class="line on_line">
+							<p>备注</p>
+							<p class="balck">{{GDTaskDetail.Remarks}}</p>
+						</div>
+					</li>
+
+					<li class="item event_reminder_item" id="OnSite_disposal">
+						<div class="line">
+							<img src="../../../img/On-site_monitoring/shui/info.png" width="25px" />
+							<span>现场处置</span>
+						</div>
+						<div class="line">
+							<p>巡检GPS位置</p>
+							<p class="balck">{{DisposalDetail.GPS}}</p>
+						</div>
+						<div class="line">
+							<p>现场照片</p>
+							<div class="photo_content">
+								<div class="photo_item" v-for="(item,index) in DisposalDetail.Photoes">
+									<img id="img" v-bind:src="item" />
+								</div>
+							</div>
+						</div>
+						<div class="line">
+							<p>现场录音</p>
+							<div v-for="(item,index) in DisposalDetail.Vedioes">
+								<div class="recording_btn">
+									录音{{index+1}}
+								</div>
+							</div>
+						</div>
+						<div class="line">
+							<p>处理情况描述</p>
+							<p class="balck">{{DisposalDetail.DisposeContent}}</p>
+						</div>
+					</li>
+					</br>
+				</ul> 
+			</div>
+		</div>
+		<script src="../../../js/shui/GridInspection/task_details.js"></script>
+		<script type="text/javascript">
+			window.addEventListener("load", function() {
+				FastClick.attach(document.body);
+			}, false);
+			mui.init();
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.back();
+			});
+		</script>
+	</body>
+
+</html>

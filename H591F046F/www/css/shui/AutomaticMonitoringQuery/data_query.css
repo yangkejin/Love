@@ -1,0 +1,294 @@
+body {
+	font-size: 15px;
+}
+
+.header {
+	position: fixed;
+	height: 49px;
+	line-height: 49px;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+	color: white;
+	background-color: #2a68cd;
+	z-index: 100;
+}
+
+.header>.back_v {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	width: 50px;
+}
+
+.content {
+	width: 100%;
+	height: 100%;
+	height: -webkit-calc(100% - 50px);
+	position: relative;
+	top: 50px;
+	overflow: hidden;
+}
+
+.condition_list {
+	position: relative;
+	top: 0;
+}
+
+.item {
+	position: relative;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 50px;
+	line-height: 44px;
+}
+
+.item:before {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: "";
+	height: 1px;
+	z-index: 50;
+	background: #d7d7d7;
+	-webkit-transform: scaleY(0.5);
+}
+
+.item div {
+	display: inline-block;
+}
+
+.item_l {
+	width: 30%;
+	float: left;
+}
+
+.item_r {
+	width: 70%;
+	color: lightgray;
+	text-align: right;
+	word-break: keep-all;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#select_station,
+#monitoringItem,
+#end_time,
+#start_time {
+	border: 0;
+	width: 70%;
+	height: 50px;
+	color: lightgray;
+	text-align: right;
+	color: black;
+	word-break: keep-all;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.query_btns {
+	position: relative;
+	top: 8px;
+}
+
+.week_mouth {
+	margin-left: 8px;
+}
+
+.week_mouth li {
+	display: inline-block;
+	float: left;
+	padding: 4px 8px;
+	border: 1px solid #CCCCCC;
+	margin-left: 4px;
+	border-radius: 5px;
+}
+
+.week_mouth li.active {
+	background: rgba(39, 163, 241, .4);
+	border: 1px solid #27A3F1
+}
+
+#query {
+	position: absolute;
+	right: 16px;
+	width: 50%;
+	height: 30px;
+}
+
+.data_content {
+	width: 100%;
+	position: absolute;
+	top: 250px;
+	bottom: 0;
+}
+
+.nav_tabs {
+	padding-left: 8px;
+	position: relative;
+	z-index: 2;
+}
+
+.nav_tabs li {
+	display: block;
+	float: left;
+	padding: 6px 8px;
+	margin-left: 6px;
+	border-radius: 5px 5px 0 0;
+	background-color: white;
+}
+
+.nav_tabs li.active {
+	border-left: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	border-top: 1px solid #CCCCCC;
+}
+
+.bottom_conntent {
+	width: 100%;
+	position: absolute;
+	top: 33px;
+	bottom: 0;
+	background-color: #F0F2F;
+	text-align: center;
+	padding-top: 8px;
+	border-top: 1px solid lightgrey;
+}
+
+.bottom_conntent>.title {
+	height: 25px;
+}
+
+.swiper-container {
+	width: 100%;
+	height: 96%;
+	height: -webkit-calc(100% - 25px);
+	background-color: white;
+}
+
+.swiper-slide {
+	text-align: center;
+	overflow: scroll;
+}
+
+.table {
+	width: 100%;
+	overflow: scroll;
+	height: 100%;
+	background-color: white;
+}
+
+table {
+	border-spacing: 0;
+	width: 100%;
+	/* overflow: auto; */
+	font-size: 10px;
+}
+
+table tr th {
+	text-align: center;
+	white-space: wrap;
+	width: 25%;
+	height: 30px;
+	border-bottom: 2px solid lightgrey;
+}
+
+table tr td {
+	width: 25%;
+	text-align: center;
+	white-space: wrap;
+	padding: 5px;
+	border-bottom: 1px solid lightgrey;
+}
+
+#monitoring_data {
+	display: block;
+}
+
+#statistics {
+	display: none;
+}
+
+
+#selectTip {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: white;
+	z-index: 999;
+	text-align: center;
+	display: none;
+
+}
+
+.selectTip_header {
+	position: relative;
+	width: 100%;
+	height: 49px;
+	line-height: 49px;
+	font-size: 15px;
+	border-bottom: 1px solid lightgrey;
+}
+
+.selectTip_header>.back_v {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	width: 50px;
+}
+
+.selectTip_content {
+	width: 100%;
+	position: absolute;
+	top: 50px;
+	bottom: 35px;
+}
+
+.selectTip_content ul {
+	width: 100%;
+	height: 100%;
+}
+
+.selectTip_content ul li {
+	min-width: 32%;
+	float: left;
+	margin-left: 1%;
+	margin-top: 1%;
+	border: 1px solid #CCCCCC;
+	border-radius: 5px;
+	padding: 4px 4px;
+}
+
+.btn_content {
+	width: 100%;
+	height: 45px;
+	position: absolute;
+	bottom: 0;
+	background-color: white;
+}
+
+.btn_content>button {
+	float: left;
+	width: 50%;
+	height: 45px !important;
+	border-radius: 0px !important;
+}
+
+#cancel_btn {
+	background-color: #f4f5f6;
+	border-color: #f4f5f6;
+	color: #27A3F1;
+}
+
+#determine_btn {
+	background-color: #27A3F1;
+	border-color: #27A3F1;
+}

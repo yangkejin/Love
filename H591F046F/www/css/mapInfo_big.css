@@ -1,0 +1,76 @@
+#marker {
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 10px;
+		color: white;
+
+}
+
+.StationType_1 {
+	border-radius: 5px;
+}
+
+.StationType_5 {
+	border-radius: 10px;
+}
+
+#info {
+	width: 200px;
+	font-size: 12px;
+}
+
+#info #StationName {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.row li {
+	text-align: left;
+	height: 100%;
+	line-height: 25px;
+	padding-left: 8px;
+	float: left;
+	width: 50%;
+	border: 1px solid rgb(150, 223, 236);
+	-webkit-box-sizing: border-box;
+}
+
+.row {
+	height: 25px;
+}
+
+#list {
+	background-color: rgb(184, 223, 236);
+}
+
+#aqi {
+	position: relative;
+	background-color: green;
+	height: 25px;
+	display: inline-block;
+	margin-bottom: 5px;
+	color: white;
+	border-radius: 5px;
+}
+
+#aqi sub {
+	font-size: 15px;
+	position: relative;
+	top: 10px;
+	padding-right: 5px;
+}
+
+#aqi span {
+	font-size: 10px;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+
+#aqiContent {}
+
+#aqiRight {
+	display: inline-block;
+	position: absolute;
+	right: 20px;
+}

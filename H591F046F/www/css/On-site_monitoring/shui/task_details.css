@@ -1,0 +1,116 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	font-size: 15px;
+}
+
+.header {
+	position: fixed;
+	height: 49px;
+	line-height: 49px;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+	color: white;
+	background-color: #2a68cd;
+	z-index: 1001;
+	top: 0;
+}
+
+.header>.back_v {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	width: 50px;
+}
+
+#wrapper {
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 49px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#scroller_ul {
+	text-align: left;
+}
+
+.item {
+	clear: both;
+	background-color: white;
+	margin: 10px;
+	padding: 5px;
+	border-radius: 6px;
+	box-shadow: 0 0 6px #ddd;
+	-webkit-box-shadow: 0 0 6px #ddd;
+}
+
+.clearfloat {
+	zoom: 1;
+}
+
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0;
+}
+
+.process_list li {
+	width: 30%;
+	padding: 10px;
+	text-align: center;
+	float: left;
+}
+
+.jiantou {
+	width: 5%;
+	float: left;
+	padding-top: 15px;
+}
+
+.jiantou::after {
+	clear: both;
+}
+
+.line {
+	position: relative;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	margin: 10px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.on_line {
+	border-bottom: 0;
+}
+
+.line p {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.line_content {
+	display: table;
+	width: 100%;
+}
+
+.line_content_item {
+	width: 33.33%;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.kuai::after {
+	clear: both;
+}
+
+.balck {
+	color: black;
+}

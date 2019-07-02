@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../lib/data/URLs.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		<script src="../../lib/iscroll/iscroll-zoom.js"></script>
+		
+		<style type="text/css">
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			body {
+				font-size: 14px;
+				background-color: white;
+			}
+
+			.back_v {
+				width: 30px;
+				height: 30px;
+				line-height: 30px;
+				border-radius: 50%;
+				text-align: center;
+				display: inline-block;
+				background-color: rgba(0, 0, 0, .5);
+				z-index: 2;
+				position: fixed;
+				top: 8px;
+				left: 8px;
+			}
+
+			#back_img {
+				position: relative;
+				top: 2px;
+			}
+
+			#wrapper {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				overflow: hidden;
+			}
+
+			#nullData {
+				z-index: 100;
+				position: absolute;
+				top: -webkit-calc(50% - 80px);
+				left: -webkit-calc(50% - 40px);
+				text-align: center;
+			}
+			
+			.scroll-wrapper{
+				-webkit-overflow-scrolling: touch;
+				overflow: scroll;
+				width: 100%;
+			  } 
+			  iframe{
+             overflow: scroll;
+			  -webkit-user-select: none;
+			  cursor: zoom-out;
+          }
+		</style>
+	</head>
+
+	<body>
+		<div id="back_v" class="back_v">
+			<img id="back_img" src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+		</div>
+		
+		<div id="wrapper">
+			<div id="scroller">
+				<img id="imgae" width="100%">
+<!-- 				<div class="scroll-wrapper">
+			<iframe id="iframe" scrolling='no'  frameborder='0'>
+			</iframe>
+		</div> -->
+			</div>
+		</div>
+		
+		
+		
+				
+		<div id="nullData">
+			<div>
+				<img width="80px" height="60px" src="../../img/daqi/kong_null_data_g.png" />
+			</div>
+			<div>
+				加载失败
+			</div>
+			<button type="button" id="reload_btn">重新加载</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		mui.ready(function() {
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground("#FFFFFF");
+			});
+			
+			var myScroll = new IScroll('#wrapper', {
+				zoom: true,
+				scrollX: true,
+				scrollY: true,
+				mouseWheel: true,
+				wheelAction: 'zoom',
+				scrollbars: true
+			});
+
+			var nullData = document.getElementById("nullData");
+			nullData.style.display = "none";
+			
+			
+			function imgload() {
+				mui.plusReady(function() {
+					// var self = plus.webview.currentWebview();
+					// var urls = new URLs();
+					// var iframe = document.getElementById("iframe");
+					// iframe.style.src = urls.PreViewPDF(self.ID);
+					// iframe.onload = function(){     
+					// 		setTimeout(function() {
+					// 		myScroll.refresh();
+					// 	}, 0);
+					// };  
+					
+					plus.nativeUI.showWaiting("加载中...",{modal:false});
+					
+					var self = plus.webview.currentWebview();
+					var iframe = document.getElementById("imgae");
+					//var iframe = document.getElementById("iframe");
+					
+					var urls = new URLs();
+					
+					//window.open(urls.PreViewPDF(self.ID),'_blank','location=no');
+					
+					iframe.src = urls.PreViewPDF(self.ID); 
+					iframe.onload = function() {
+						console.log("load");
+						plus.nativeUI.closeWaiting(); 
+						nullData.style.display = "none";
+						
+				// 		var wd = iframe.contentWindow.document.documentElement.scrollWidth;
+    // var ht = iframe.contentWindow.document.documentElement.scrollHeight;
+    // var x = document.getElementsByClassName('scroll-wrapper')[0].clientWidth / wd;
+    // iframe.style.width = wd +'px';
+    // iframe.style.height = ht +'px';
+    // iframe.style.transform = `scale(${x})`;
+    // iframe.style.transformOrigin='0 0';
+
+						setTimeout(function() {
+							myScroll.refresh();
+						}, 0);
+					}
+					iframe.onerror = function() {
+						console.log("error");
+						plus.nativeUI.closeWaiting();
+						nullData.style.display = "block";
+						//						myScroll.destroy(); 
+						//						myScroll = null;
+					}
+				})
+			}
+
+			imgload();
+
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.back();
+				mui.plusReady(function() {
+						plus.nativeUI.closeWaiting(); 
+						plus.navigator.setStatusBarBackground("#2a68cd");
+				});
+			});
+
+			document.getElementById("reload_btn").addEventListener("tap", function() {
+				imgload();
+			});
+
+		})
+	</script>
+
+	</body>
+
+</html>

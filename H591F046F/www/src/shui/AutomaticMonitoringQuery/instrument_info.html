@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../../js/mui.js"></script>
+		<link href="../../../css/reset.css" rel="stylesheet" />
+		<link href="../../../css/shui/AutomaticMonitoringQuery/instrument_info.css" rel="stylesheet" />
+
+		<script src="../../../lib/vue.min.js"></script>
+		<script src="../../../lib/data/shui/Datas.js"></script>
+		<script src="../../../lib/data/shui/URLs.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+
+		<link href="../../../lib/swiper.min.css" rel="stylesheet" />
+		<script src="../../../lib/swiper.min.js"></script>
+		<script src="../../../lib/fastclick.js"></script>
+
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<span id="header_title">仪器信息</span>
+			<div id="back_v" class="back_v">
+				<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+		</div>
+		<div class="content">
+			<div class="search">
+				<input type="text" id="searchInput" class="searchInput mui-input" value="" placeholder="请输入您要查询的站点名称" id="btnSearch">
+			</div>
+			<div id="d_region">区县</div>
+			<div class="region_select" id="region_select">
+				<ul class="region_select_ul">
+					<li class="on" v-for="(item,index) in ExtensionData" @click="itemClick(item,index)" v-bind:style="bindColor(item)">
+						{{item.Name}}
+						<div v-bind:style="bindImgSrc(item)"></div>
+					</li>
+				</ul>
+				<div class="btn_content">
+					<button id="cancel_btn" type="button" class="mui-btn mui-btn-primary">取消</button>
+					<button id="determine_btn" type="button" class="mui-btn mui-btn-primary">确定</button>
+					<div style="clear: both;"></div>
+				</div>
+			</div>
+			<div class="instrument_content">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" v-for="(item,index) in ExtensionData">
+							<div class="swiper-slide-content">
+								<div class="title">
+									<div class="l">
+										{{item.StationName}}
+									</div>
+									<div class="r">
+										{{item.RegionName}}
+									</div>
+								</div>
+								<div class="InstrumentList">
+									<ul>
+										<li v-for="(item2,index2) in item.Details">
+											<div class="device-b-con" v-bind:class="bindBgImg(item2)">
+												<p>{{item2.ItemName}}</p>
+												<p>{{item2.ItemValue}}</p>
+											</div>
+										</li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tip">
+				<ul>
+					<li class="d-bg-1">正常</li>
+					<li class="d-bg-3">无数据</li>
+					<li class="d-bg-6">超标</li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+			mui.init();
+
+			window.addEventListener("load", function() {
+				FastClick.attach(document.body);
+			}, false);
+
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.back();
+			});
+
+			var searchInput = document.getElementById("searchInput");
+
+			var swiper = new Swiper('.swiper-container', {
+				observer: true, //修改swiper自己或子元素时，自动初始化swiper
+				observeParents: true, //修改swiper的父元素时，自动初始化swiper
+			});
+
+			var isShow = false;
+			var region_select = document.getElementById("region_select");
+			
+			// region_select.addEventListener("click", function() {
+			// 	if (!isShow) {
+			// 		old_selectData = [].concat(region.selectData);
+			// 		region_select.style.display = "block";
+			// 		isShow = true;
+			// 	} else {
+			// 		region_select.style.display = "none";
+			// 		isShow = false;
+			// 	}
+			// });
+
+			document.getElementById("d_region").addEventListener("click", function() {
+				if (!isShow) {
+					old_selectData = [].concat(region.selectData);
+					region_select.style.display = "block";
+					isShow = true;
+				} else {
+					region_select.style.display = "none";
+					isShow = false;
+				}
+			});
+
+			document.getElementById("cancel_btn").addEventListener("click", function() {
+				region_select.style.display = "none";
+				isShow = false;
+				region.selectData = old_selectData;
+				region.$forceUpdate();
+			});
+
+			document.getElementById("determine_btn").addEventListener("click", function() {
+				region_select.style.display = "none";
+				isShow = false;
+				getData();
+			});
+
+			function itemClick(item) {
+				if (isPresence(region.selectData, item)) {
+					region.selectData.splice(getArrIndex(region.selectData, item), 1);
+				} else {
+					region.selectData.push(item);
+				}
+				region.$forceUpdate();
+			}
+
+			function isPresence(arr, item) {
+				for (var i = 0; i < arr.length; i++) {
+					var dic = arr[i];
+					if (dic == item) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			function getArrIndex(arr, item) {
+				for (var i = 0; i < arr.length; i++) {
+					var dic = arr[i];
+					if (dic == item) {
+						return i;
+					}
+				}
+			}
+
+
+			var old_selectData = [];
+			var region = new Vue({
+				el: '.region_select_ul',
+				data: {
+					ExtensionData: [],
+					selectData: []
+				},
+				methods: {
+					itemClick: function(item, index) {
+						itemClick(item);
+					},
+					bindColor: function(item) {
+						for (var i = 0; i < this.selectData.length; i++) {
+							var dic = this.selectData[i];
+							if (item.Name == dic.Name) {
+								return {
+									"border-bottom": "1px solid #3C80BB",
+									"color": "#3C80BB"
+								}
+							}
+						}
+						return {
+							"border-bottom": "0px",
+							"color": "black"
+						}
+					},
+					bindImgSrc: function(item) {
+						var src = "";
+						for (var i = 0; i < this.selectData.length; i++) {
+							var dic = this.selectData[i];
+							if (item.Name == dic.Name) {
+								src = "../../../img/shui/duigou.png";
+								return {
+									"background": "url(" + src + ") no-repeat center center",
+									"background-size": "contain"
+								}
+							}
+						}
+
+					},
+				}
+			});
+
+			var datas = new Datas();
+			datas.GetRegions(function(DBData) {
+				if (DBData) {
+					region.ExtensionData = DBData.ExtensionData;
+				} else {
+					region.ExtensionData = [];
+				}
+			}, function(NewData) {
+				if (NewData) {
+					region.ExtensionData = NewData.ExtensionData;
+				} else {
+					region.ExtensionData = [];
+				}
+			});
+
+			var app = new Vue({
+				el: '.swiper-wrapper',
+				data: {
+					ExtensionData: []
+				},
+				methods: {
+					bindBgImg: function(item) {
+						var imgSrc = "";
+						if (item.AlarmCode == null) {
+							imgSrc = "yiqi_bg_01";
+						} else if (item.AlarmCode == "NoDataAlarm") {
+							imgSrc = "yiqi_bg_02";
+						} else if (item.AlarmCode == "OverAlarm") {
+							imgSrc = "yiqi_bg_03";
+						}
+						// return {
+						// 	"background": "url(" + imgSrc + ") no-repeat center center",
+						// 	"background-size": "contain",
+						// 	"height": "88px",
+						// 	"line-height": "67px"
+						// }
+						return imgSrc;
+					}
+				}
+			});
+
+			function getData() {
+				//swiper.removeAllSlides();
+				var arr = region.selectData;
+				var regionsArr = [];
+				for (var i = 0; i < arr.length; i++) {
+					var dic = arr[i];
+					regionsArr.push(dic.Id);
+				}
+				var regions = regionsArr.join(",");
+				datas.GetInstrumentList(searchInput.value, regions, function(NewData) {
+					if (NewData) {
+						app.ExtensionData = NewData.ExtensionData;
+						Vue.nextTick(function() {
+							setTimeout(function() {
+								swiper = new Swiper('.swiper-container', {
+									observer: true, //修改swiper自己或子元素时，自动初始化swiper
+									observeParents: false, //修改swiper的父元素时，自动初始化swiper
+								});
+								// swiper.updateSlides();
+								// swiper.updateSize();
+								// swiper.updateProgress()
+							}, 0);
+						})
+					}
+				});
+			}
+			getData();
+		</script>
+	</body>
+
+</html>

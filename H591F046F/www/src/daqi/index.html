@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<script src="../../lib/TabBar.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
+<!-- 		<script src="../../js/muiBack.js" type="text/javascript" charset="utf-8"></script>
+ -->		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar-tab {
+				background-color: black;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav id="nav" class="mui-bar mui-bar-tab">
+		</nav>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground("#2a68cd");
+			});
+			
+			var tabbar = new tabbar();
+			tabbar.subpages = ['home.html', 'map.html', 'analysis.html', 'patrol.html'];
+			tabbar.SelectTextColor = ['#63baf0', '#63baf0', '#63baf0', '#63baf0'];
+			tabbar.UnSelectTextColor = ['#959595', '#959595', '#959595', '#959595'];
+			tabbar.Titles = ['首页', '地图', '分析', '巡查'];
+			tabbar.SelectImages = ['../../img/daqi/home_s.png', '../../img/daqi/map_s.png', '../../img/daqi/analyze_s.png', '../../img/daqi/patrol_s.png'];
+			tabbar.UnSelectImages = ['../../img/daqi/home_u.png', '../../img/daqi/map_u.png', '../../img/daqi/analyze_u.png', '../../img/daqi/patrol.png'];
+			tabbar.init();
+			tabbar.showTabBar();
+			tabbar.clickCallBack = function(id) {
+				console.log(id);
+				// if(id == 2) {
+				// 	mui.plusReady(function() {
+				// 		plus.navigator.setStatusBarBackground("white");
+				// 	});
+				// } else {
+					mui.plusReady(function() {
+						plus.navigator.setStatusBarBackground("#2a68cd");
+					});
+				//}
+			}
+			
+			window.addEventListener('back', function(e) {
+				mui.back(); 
+			});
+			
+		</script>
+	</body>
+
+</html>

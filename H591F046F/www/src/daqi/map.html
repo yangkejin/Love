@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+
+	<head>
+
+		<meta charset="UTF-8">
+		<title></title>
+
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+		<script src="../../lib/amapApi.js" ></script>
+		<script src="../../lib/amapUI.js" ></script>
+
+		<script src="../../lib/zepto.min.js"></script>
+		<script src="../../lib/vue.min.js"></script>
+		<script src="../../lib/vconsole.min.js"></script>
+
+		<script src="../../lib/tool/AQITool.js" ></script>
+		<script src="../../lib/tool/ApplicationUpdateTool.js" ></script>
+		<script src="../../lib/tool/DateTool.js" ></script>
+		<script src="../../lib/tool/NetWorkTool.js" ></script>
+
+		<script src="../../lib/tool/PollutantFormat.js" ></script>
+		<script src="../../lib/tool/upDropDownMenu.js" ></script>
+
+		<script src="../../lib/data/Datas.js"></script>
+		<script src="../../lib/data/Internet.js"></script>
+		<script src="../../lib/data/StorageTool.js"></script>
+		<script src="../../lib/data/URLs.js"></script>
+		<script src="../../lib/data/webSQLTool.js"></script>
+
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/daqi/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/daqi/mapInfo_big.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/daqi/map.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/daqi/mapRemoveLog.css" />
+
+		<script type="text/javascript" src="../../lib/fastclick.js"></script>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+
+		<script type="text/javascript">
+		</script>
+
+		<style type="text/css">
+			.title {
+				position: fixed;
+				top: 0;
+				left: 0;
+				height: 45px;
+				width: 100%;
+				line-height: 45px;
+				font-size: 17px;
+				text-align: center;
+				color: #fff;
+				z-index: 1000;
+				background-color: #2a68cd;
+			}
+
+			#map-select {
+				display: inline-block;
+			}
+
+			#refreshImg {
+				-webkit-animation: run 1s linear 0s infinite;
+			}
+
+			@-webkit-keyframes run {
+				from {
+					-webkit-transform: rotate(0deg);
+				}
+ 
+				to {
+					-webkit-transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="header">
+			<span id="header_title">空气质量实况</span>
+			<div id="back_v" class="back_v">
+				<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+			<div id="refresh" style="display: inline-block;width: 50px;height: 100%;position: absolute;right: 0;">
+				<img id="refreshImg" src="../../img/daqi/refresh.png" style="width: 20px;height: 20px;" />
+			</div>
+		</div>
+
+		<div style="position: absolute;top: 45px;bottom: 0;left: 0;right: 0;">
+			<div id="mapContainer">
+				<div style="width: 100px; display:inline;font-size: 15px;position: absolute;top: 45%;margin-left: -50px;">
+					地图加载中...
+				</div>
+			</div>
+
+			<div id="mapTimePoint">
+				—月—日 —:—更新
+			</div>
+
+			<div class="map-tip-site">
+				<img src="../../img/daqi/map-tip-site.png" />
+			</div>
+
+			<div class="map-tip-aqi">
+				<img src="../../img/daqi/map-tip-aqi.png" />
+			</div>
+
+			<ul class="pollute">
+				<li type="AQI">AQI</li>
+				<li type="PM2_5">PM<sub>2.5</sub></li>
+				<li type="PM10">PM<sub>10</sub></li>
+				<li type="NO2">NO<sub>2</sub></li>
+				<li type="SO2">SO<sub>2</sub></li>
+				<li type="O3">O<sub>3</sub></li>
+				<li type="CO">CO</li>
+			</ul>
+		</div>
+	</body>
+	<script src="../../js/daqi/comm.js" ></script>
+	<script src="../../js/daqi/SharingMap.js" ></script>
+
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			plus.navigator.setStatusBarBackground("#2a68cd");
+		});
+		window.addEventListener("load", function() {
+		}, false);
+
+		mui.init({
+			keyEventBind: {
+				backbutton: false,
+				menubutton: false
+			},
+		});
+
+		mui.ready(function() {
+			var refreshImg = document.getElementById("refreshImg");
+
+			function commonRefresh() {
+				refreshImg.style.webkitAnimationPlayState = "running";
+				//removeAmapJs();
+				addAmapJs();
+			}
+
+			commonRefresh();
+
+			NetWorkTool.netChange(true, function(is) {
+				if (is) {
+					commonRefresh();
+				}
+			});
+
+			//			document.getElementById("back").addEventListener("tap", function() {
+			//				mui.back();
+			//				history.back();
+			//			});
+
+			document.getElementById("refresh").addEventListener("tap", function() {
+				NetWorkTool.isNetWork(true);
+				commonRefresh();
+			});
+		});
+	</script>
+
+</html>

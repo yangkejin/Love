@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/daqi/home.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+
+		<script src="../../lib/tool/AQITool.js" ></script>
+		<script src="../../lib/tool/ApplicationUpdateTool.js" ></script>
+		<script src="../../lib/tool/DateTool.js" ></script>
+		<script src="../../lib/tool/NetWorkTool.js" ></script>
+
+		<script src="../../lib/data/Datas.js"></script>
+		<script src="../../lib/data/Internet.js"></script>
+		<script src="../../lib/data/StorageTool.js"></script>
+		<script src="../../lib/data/URLs.js"></script>
+		<script src="../../lib/data/webSQLTool.js"></script>
+
+		<script src="../../lib/tool/PollutantFormat.js" ></script>
+		<script src="../../lib/vue.min.js"></script>
+		<link href="../../css/daqi/nulldata.css" rel="stylesheet" />
+	
+	</head>
+
+	<body>
+		<!-- <div class="title">
+			顺义空气质量
+		</div> -->
+		<div class="header">
+				<span id="header_title">顺义空气质量</span>
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+			</div>
+		<div class="allcontent">
+			<div class="top_content">
+				<section class="section section1">
+					<div class="info1">
+						<p class="aqi">空气质量指数/AQI</p>
+						<div v-bind:style="AQIStyleColor" class="aqi-value">{{CityLiveData.AQI}}<span v-bind:style="AQIStyleBGColor" class="mui-badge">{{Quality}}</span></div>
+						<div class="main-pollute">
+							<p>{{Time}}</p>
+							<p id="PrimaryPollutant" v-html="PrimaryPollutant"></p>
+						</div>
+					</div>
+					<ul class="info2">
+						<li>
+							<p class="name">PM<sub>2.5</sub></p>
+							<span v-bind:style="ConventionalPrimaryPollutantBGClor('PM2.5')" class="mui-badge">{{CityLiveData.PM2_5}}</span>
+						</li>
+						<li>
+							<p class="name">PM<sub>10</sub></p>
+							<span v-bind:style="ConventionalPrimaryPollutantBGClor('PM10')" class="mui-badge">{{CityLiveData.PM10}}</span>
+						</li>
+						<li>
+							<p class="name">O<sub>3</sub></p>
+							<span v-bind:style="ConventionalPrimaryPollutantBGClor('O3')" class="mui-badge">{{CityLiveData.O3}}</span>
+						</li>
+						<li>
+							<p class="name">SO<sub>2</sub></p>
+							<span v-bind:style="ConventionalPrimaryPollutantBGClor('SO2')" class="mui-badge">{{CityLiveData.SO2}}</span>
+						</li>
+						<li>
+							<p class="name">NO<sub>2</sub></p>
+							<span v-bind:style="ConventionalPrimaryPollutantBGClor('NO2')" class="mui-badge">{{CityLiveData.NO2}}</span>
+						</li>
+						<li>
+							<p class="name">CO</p>
+							<span v-bind:style="ConventionalPrimaryPollutantBGClor('CO')" class="mui-badge">{{CityLiveData.CO}}</span>
+						</li>
+					</ul>
+					<ul class="rank">
+						<li><button type="button" value="3">实时排名 ></button></li>
+						<li><button type="button" value="6">月排名 ></button></li>
+						<li><button type="button" value="7">季度排名 ></button></li>
+					</ul>
+				</section>
+
+			</div>
+
+			<div class="bottom_content">
+				<section class="section section3">
+					<div class="section-title">未来7天空气质量预报</div>
+					<div class="content">
+						<div class="slide-box">
+							<div id="nullData">
+								<div>
+									<img width="80px" height="60px" src="../../img/daqi/kong_null_data_g.png" />
+								</div>
+								<span>暂无数据!</span>
+							</div>
+							<div class="swiper-slide" v-for="(item,index) in ForCast">
+								<p>{{getTimePoint(index)}}</p>
+								<div class="air-quality" v-bind:style="getQualityImage(index)"></div>
+								<p>AQI:{{item.AQI}}</p>
+								<p v-html="getPrimaryPollutantName(index)">首要污染物：O3</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<img src="../../img/daqi/p_3@3x.png"/>
+		</div>
+		<script src="../../js/daqi/comm.js" ></script>
+		<script src="../../js/daqi/home.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground("#2a68cd");
+			});
+			mui.init({
+				keyEventBind: {
+					backbutton: false,
+					menubutton: false
+				},
+			})
+			mui.ready(function() {
+				$(".rank li button").click(function() {
+					var value = $(this).attr("value");
+					mui.openWindow({
+						url: 'rank.html',
+						id: 'rank', 
+						extras: {
+							ReportTimeType: value
+						},
+						waiting: {
+							title: '正在跳转...',
+						}
+					});
+				});
+			})
+		</script>
+
+	</body>
+
+</html>

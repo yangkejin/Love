@@ -1,0 +1,292 @@
+body {
+	font-size: 15px;
+}
+
+.header {
+	position: fixed;
+	height: 49px;
+	line-height: 49px;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+	color: white;
+	background-color: #2a68cd;
+	z-index: 1001;
+}
+
+.header>.back_v {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	width: 50px;
+}
+
+.content {
+	width: 100%;
+	height: 100%;
+	height: -webkit-calc(100% - 50px);
+	position: relative;
+	top: 50px;
+}
+
+.search {
+	height: 45px;
+	line-height: 45px;
+	width: 100%;
+	position: relative;
+	border-bottom: 1px solid lightgrey;
+}
+
+.searchInput {
+	width: 94% !important;
+	margin-left: 3% !important;
+	margin: auto;
+	padding: 0 1em;
+	border: 1px solid #CCCCCC !important;
+	background: #FFFFFF;
+	line-height: 25px;
+	height: 30px !important;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding-left: 5px !important;
+	background: #FDFDFD url(../../../img/shui/icon_search_area.png) no-repeat scroll 100% 50%;
+	background-size: 1.5em 1.5em;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	appearance: none;
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+	outline: 0;
+	box-shadow: none;
+	color: #000;
+}
+
+#d_region {
+	margin-left: 3%;
+	margin-top: 20px;
+	position: relative;
+	color: #5A5A5A;
+	display: inline-block;
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	font-size: 12px;
+	background: #F0F2F5;
+	text-align: center;
+}
+
+#d_region:after {
+	content: '';
+	display: inline-block;
+	position: absolute;
+	right: 3px;
+	top: 12px;
+	width: 0px;
+	height: 0px;
+	border: 4px solid transparent;
+	border-top: 4px solid #B2B2B2;
+}
+
+.region_select {
+	position: absolute;
+	top: 110px;
+	bottom: 0;
+	background: rgba(0, 0, 0, .3);
+	width: 100%;
+	z-index: 2;
+	border-top: 1px solid lightgrey;
+	display: none;
+}
+
+.region_select ul {
+	width: 100%;
+	height: 200px;
+	background-color: white;
+	overflow: scroll;
+}
+
+.region_select ul li {
+	position: relative;
+	float: left;
+	width: 46%;
+	margin-left: 2%;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.region_select ul li div {
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	top: 15px;
+	right: 5px;
+	background-color: white;
+}
+
+.btn_content {
+	background-color: white;
+}
+
+.btn_content>button {
+	float: left;
+	width: 50%;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	border-radius: 0px !important;
+}
+
+#cancel_btn {
+	background-color: #f4f5f6;
+	border-color: #f4f5f6;
+	color: #27A3F1;
+}
+
+#determine_btn {
+	background-color: #27A3F1;
+	border-color: #27A3F1;
+}
+
+/* .on {
+	border-bottom: 1px solid #3C80BB;
+    color: #3C80BB;
+} */
+
+
+.swiper-container {
+	width: 100%;
+	height: 99%;
+}
+
+.swiper-slide {
+	text-align: center;
+	padding: 12px;
+}
+
+.swiper-slide-content {
+	background-color: white;
+	border-radius: 5px;
+	padding: 8px;
+}
+
+.swiper-slide-content>.title {
+	border-bottom: 1px solid lightgrey;
+	position: relative;
+	text-align: left;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.title>.l {
+	display: inline-block;
+	margin-left: 16px;
+}
+
+.title>.r {
+	display: inline-block;
+	position: absolute;
+	right: 16px;
+}
+
+.swiper-slide-content>.InstrumentList {
+	width: 100%;
+}
+
+.InstrumentList ul {
+	padding-top: 8px;
+	width: 100%;
+}
+
+.InstrumentList ul li {
+	display: inline-block;
+	width: 33.33%;
+	height: 33.333%;
+	margin-top: 8px;
+}
+
+.device-b-con {
+	height: 88px;
+	line-height: 67px;
+	text-align: center;
+	background: url(../../../img/shui/yiqi_bg_02.png) no-repeat center center;
+	background-size: contain;
+}
+
+.yiqi_bg_01 {
+
+	background: url(../../../img/shui/yiqi_bg_01.png) no-repeat center center;
+	background-size: contain;
+
+}
+
+.yiqi_bg_02 {
+
+	background: url(../../../img/shui/yiqi_bg_02.png) no-repeat center center;
+	background-size: contain;
+
+}
+
+.yiqi_bg_03 {
+
+	background: url(../../../img/shui/yiqi_bg_03.png) no-repeat center center;
+	background-size: contain;
+}
+
+.device-b-con>p {
+	font-size: 12px;
+	height: 14px;
+	color: white;
+}
+
+.instrument_content {
+	width: 100%;
+	position: absolute;
+	top: 110px;
+	bottom: 30px;
+	background-color: #f4f5f6;
+}
+
+
+.tip {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	position: absolute;
+	bottom: 0;
+	background-color: white;
+	box-shadow: 0 -2px 5px rgba(0, 0, 0, .2);
+}
+
+.d-bg-1 {
+	background-color: #40C916;
+}
+
+.d-bg-3 {
+	background-color: #FF9999;
+}
+
+.d-bg-6 {
+	background-color: #FF6600;
+}
+
+.tip ul {
+	position: relative;
+	width: 100%;
+	margin-top: 5px;
+}
+
+.tip ul li {
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	width: 33.33%;
+	display: inline-block;
+	float: left;
+}

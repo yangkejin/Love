@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../../css/reset.css" rel="stylesheet" />
+		<link href="../../../css/shui/GridInspection/start_conclude.css" rel="stylesheet" />
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../lib/vue.min.js"></script>
+
+		<script src="../../../lib/data/shui/Datas.js"></script>
+		<script src="../../../lib/data/shui/URLs.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<span id="header_title">反馈办结</span>
+			<div id="back_v" class="back_v">
+				<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+		</div>
+		<div class="content">
+			<div>反馈办结人：</div>
+			<div class="name" v-model="ExtensionData.CompleteUser">管理员</div>
+			<div>反馈办结意见：</div>
+			<textarea id='question' class="mui-input-clear question" placeholder="请输入反馈办结意见" v-model="ExtensionData.CompleteAdvice"></textarea>
+
+			<div class="btn_div">
+				<button id="submit" type="button" class="mui-btn mui-btn-primary" @click="submit()">提交</button>
+			</div>
+		</div>
+		<script src="../../../js/shui/GridInspection/start_conclude.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.back();
+			});
+			var ID = "";
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				ID = self.ID;
+				getData();
+			});
+
+			function getData() {
+				var datas = new Datas();
+				datas.GetFeedbackDetail(ID, function(NewData) {
+					NewData.ExtensionData.CompleteUser = "管理员";
+					app.ExtensionData = NewData.ExtensionData;
+				});
+			}
+
+			var app = new Vue({
+				el: '.content',
+				data: {
+					ExtensionData: {
+						CompleteUser: "管理员",
+						CompleteAdvice: null
+					}
+				},
+				methods: {
+					submit: function() {
+						mui.plusReady(function() {
+							plus.nativeUI.showWaiting("正在提交...", {
+								back: 'none'
+							});
+							var datas = new Datas();
+							var jsonStr = JSON.stringify(app.ExtensionData);
+							datas.TaskComplete(jsonStr, function(data, e) {
+								console.log(JSON.stringify(data));
+								plus.nativeUI.closeWaiting();
+								if (data.Success) {
+									mui.back();
+									plus.nativeUI.toast("上传成功");
+								} else {
+									plus.nativeUI.toast(data.Message);
+								}
+							});
+						})
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>

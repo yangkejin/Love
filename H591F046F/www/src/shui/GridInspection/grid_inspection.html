@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../css/reset.css" />
+		<link rel="stylesheet" href="../../../css/shui/GridInspection/grid_inspection.css" />
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../lib/jquery-3.3.1.min.js"></script>
+		<script src="../../../lib/vue.min.js"></script>
+		<script src="../../../lib/tool/TextAutoScroll.js"></script>
+
+		<script src="../../../lib/data/shui/Datas.js"></script>
+		<script src="../../../lib/data/shui/URLs.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+
+		<style>
+			.back_v {
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				width: 50px;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="head">
+				<div id="back_v" class="back_v">
+					<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+				<span>网格化巡检</span>
+			</div>
+
+			<div class="banner">
+				<img src="../../../img/shui/home_list_top_bg.png" />
+			</div>
+			<div class="menu-panel">
+				<div class="main-menu">
+					<div class="menu menu1 clickhook" value="1">
+						现场处置
+						<img src="../../../img/shui/On-siteDisposal.png" />
+					</div>
+					<div class="menu menu2 clickhook" value="2">
+						反馈办结
+						<img src="../../../img/shui/Feedback.png" />
+					</div>
+				</div>
+				<div class="latest-news">
+					<img src="../../../img/shui/RecentNews.png" alt="" />
+					<p id="lastEvent">{{ExtensionData.lastEvent}}</p>
+				</div>
+			</div>
+			<div class="second-menu">
+				<div class="menu" value="0">
+					<div class="icon icon1"><img src="../../../img/shui/EventReminder.png" /><span class="count">{{ExtensionData.EventReminder}}</span>
+						<div class="mask"></div>
+					</div>
+					<p>事件提醒</p>
+				</div>
+				<div class="menu" value="1">
+					<div class="icon icon2"><img src="../../../img/shui/Pending.png" /><span class="count">{{ExtensionData.PendingDisposa}}</span>
+						<div class="mask"></div>
+					</div>
+					<p>待处理</p>
+				</div>
+				<div class="menu" value="2">
+					<div class="icon icon3"><img src="../../../img/shui/PendingFeedback.png" /><span class="count">{{ExtensionData.RemainToBeDone}}</span>
+						<div class="mask"></div>
+					</div>
+					<p>待反馈</p>
+				</div>
+				<div class="menu" value="3">
+					<div class="icon icon4"><img src="../../../img/shui/completed.png" /><span class="count">{{ExtensionData.Completed}}</span>
+						<div class="mask"></div>
+					</div>
+					<p>已完成</p>
+				</div>
+			</div>
+			<div class="add-task clickhook">
+				<img src="../../../img/shui/NewTask.png" />
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/shui/GridInspection/grid_inspection.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		document.getElementById("back_v").addEventListener("tap", function() {
+			mui.back();
+		});
+		$(".icon").on('touchstart', function() {
+			var i = $(this);
+			i.addClass('touchani');
+			setTimeout(function() {
+				i.removeClass('touchani');
+			}, 200)
+		})
+		$(".clickhook").on('touchstart', function() {
+			$(this).addClass('clicked');
+			$(window).one('touchend', function() {
+				$(".clicked").removeClass('clicked');
+			})
+		})
+		mui('.main-menu').on('tap', 'div', function(e) {
+			var value = this.getAttribute('value');
+			mui.openWindow({
+				url: 'my_task.html',
+				id: 'my_task',
+				extras: {
+					segSelectIndex: value,
+				},
+				waiting: {
+					title: '正在跳转...',
+				}
+			});
+		});
+		mui('.second-menu').on('tap', '.menu', function(e) {
+			var value = this.getAttribute('value');
+			mui.openWindow({
+				url: 'my_task.html',
+				id: 'my_task',
+				extras: {
+					segSelectIndex: value,
+				},
+				waiting: {
+					title: '正在跳转...',
+				}
+			});
+		});
+	</script>
+
+</html>

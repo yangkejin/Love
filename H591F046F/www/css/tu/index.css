@@ -1,0 +1,165 @@
+body,
+html {
+	width: 100%;
+	height: 100%;
+	font-size: 15px;
+}
+
+.container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+.head {
+	position: relative;
+	height: 49px;
+	font-size: 17px;
+	line-height: 46px;
+	text-align: center;
+	background: #2a68cd;
+	color: #fff;
+}
+
+.back_v {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	width: 50px;
+}
+
+.right_menu {
+	display: inline-block;
+	position: absolute;
+	right: 10px;
+	width: 50px;
+}
+
+#mapContainer {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	top: 49px;
+	bottom: 0;
+}
+
+.mui-checkbox.mui-left input[type=checkbox],
+.mui-radio.mui-left input[type=radio] {
+	left: 10px;
+}
+
+.mui-checkbox.mui-left label,
+.mui-radio.mui-left label {
+	padding-right: 0px;
+	padding-left: 40px;
+}
+
+.input_content {
+	width: 90%;
+	display: inline-block;
+	margin-left: 5%;
+	margin-top: 10px;
+	background-color: white;
+	z-index: 100000;
+	position: absolute;
+	border-radius: 6px;
+	box-shadow: 0 0 6px #ddd;
+	-webkit-box-shadow: 0 0 6px #ddd;
+}
+
+.input_item {
+	width: 32%;
+	display: inline-block;
+}
+
+.tip_level {
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+	width: 120px;
+	z-index: 100000;
+}
+
+.map {
+	display: block;
+}
+
+.list {
+	display: none;
+}
+
+#station_btn {
+	display: inline-block;
+}
+
+.number {
+	margin: 10px;
+	height: 20px;
+	font-size: 18px;
+	color: #609ff7;
+}
+
+#wrapper {
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: absolute;
+	top: 89px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#scroller_ul {
+	text-align: left;
+}
+
+.item {
+	position: relative;
+	padding: 10px;
+	padding-right: 40px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.item p {
+	word-wrap: break-word
+}
+
+.black_color {
+	color: black;
+}
+
+.yellow_color {
+	color: #b79a3b;
+}
+
+.img_content {
+	height: 100%;
+	width: 40px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: center;
+}
+
+.img_content img {
+	position: relative;
+	top: -webkit-calc(50% - 10px);
+}
+
+#marker {
+	width: 28px;
+	height: 34px;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 28px;
+	text-align: center;
+}
+
+#info_list li {
+	padding-bottom: 4px;
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../../js/mui.min.js"></script>
+		<link href="../../../css/reset.css" rel="stylesheet" />
+		<script src="../../../lib/fastclick.js"></script>
+		<script src="../../../lib/tool/upDropDownMenu.js"></script>
+		<script src="../../../lib/jquery-3.3.1.min.js"></script>
+		<script src="../../../lib/vue.min.js"></script>
+
+		<script src="../../../lib/data/shui/Datas.js"></script>
+		<script src="../../../lib/data/shui/URLs.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+
+		<link href="../../../lib/datepicker/mui.picker.min.css" rel="stylesheet" />
+		<script src="../../../lib/datepicker/mui.picker.min.js"></script>
+
+		<link href="../../../lib/datepicker/mui.dtpicker.css" rel="stylesheet" />
+		<script src="../../../lib/datepicker/mui.dtpicker.js"></script>
+		
+		<link href="../../../css/shui/ManualMonitoringQuery/data_query.css" rel="stylesheet" />
+
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<span id="header_title">数据查询</span>
+			<div id="back_v" class="back_v">
+				<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+		</div>
+		<div class="content1">
+
+			<div class="content">
+				<ul>
+					<!-- <li class="item">
+					<div class="item_l">选择断面：</div>
+					<input id="select_section" type="text" class="mui-input" placeholder="点击选择断面" readonly="readonly"/>
+				</li> -->
+					<li class="item">
+						<div class="item_l">开始时间：</div>
+						<input id="start_time" type="text" class="mui-input" placeholder="点击选择时间" readonly="readonly" />
+					</li>
+					<li class="item">
+						<div class="item_l">结束时间：</div>
+						<input id="end_time" type="text" class="mui-input" placeholder="点击选择时间" readonly="readonly" />
+					</li>
+					<li class="item">
+						<div class="item_l">选择格式：</div>
+						<input id="format" type="text" class="mui-input" placeholder="--请选择--" readonly="readonly" />
+					</li>
+				</ul>
+				<div class="query_content">
+					<button id="query" type="button" class="mui-btn mui-btn-primary">查询</button>
+				</div>
+				<div class="table_content">
+					<div class="table_content_title" id="Table_content_title"></div>
+					<div class="table">
+						<table border="1"> 
+							<tr>
+								<th v-for="(item,index) in ExtensionData.Columns" v-html="item.ColumnName"></th>
+							</tr>
+
+							<tr v-for="(item,index) in ExtensionData.Data">
+								<td v-for="(item2,index) in ExtensionData.Columns" v-html="getItemValue(item,item2.FieldName)"></td>
+							</tr>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../../js/shui/ManualMonitoringQuery/data_query.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			window.addEventListener("load", function() {
+				FastClick.attach(document.body);
+			}, false);
+			document.getElementById("back_v").addEventListener("tap", function() {
+				mui.fire(plus.webview.getWebviewById("manual_monitoring_query"), 'back');
+			});
+			
+		</script>
+	</body>
+
+</html>

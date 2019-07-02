@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/daqi/reset.css" rel="stylesheet" />
+		<script src="../../lib/tool/Segmentation.js"></script>
+		<script src="../../js/mui.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		<script src="../../lib/tool/upDropDownMenu.js"></script>
+		<script src="../../lib/vue.min.js"></script>
+		<script src="../../lib/tool/DateTool.js"></script>
+		<link href="../../css/daqi/patrol.css" rel="stylesheet" />
+
+		<script src="../../lib/data/Datas.js"></script>
+		<script src="../../lib/data/Internet.js"></script>
+		<script src="../../lib/data/StorageTool.js"></script>
+		<script src="../../lib/data/URLs.js"></script>
+		<script src="../../lib/data/webSQLTool.js"></script>
+
+		<link href="../../lib/datepicker/mui.picker.min.css" rel="stylesheet" />
+		<script src="../../lib/datepicker/mui.picker.min.js"></script>
+
+		<link href="../../lib/datepicker/mui.dtpicker.css" rel="stylesheet" />
+		<script src="../../lib/datepicker/mui.dtpicker.js"></script>
+
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<div class="content">
+			<div class="header">
+				<span id="header_title">巡查</span>
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+			</div>
+			<div class="page_content">
+				<div id="page"></div>
+			</div>
+
+			<!-- 填报 -->
+			<div id="report">
+				<div class="item">
+					<div class="item_name">填报人</div>
+					<input id="Reporter" type="text" class="mui-input" placeholder="请输入内容">
+				</div>
+				<div class="item">
+					<div class="item_name">填报时间</div>
+					<input id="TimePoint" type="text" class="mui-input" readonly="readonly">
+				</div>
+				<div class="item">
+					<div class="item_left">
+						<div class="item_name">自动定位经度</div>
+						<input id='Longitude' type="text" class="mui-input" readonly="readonly">
+					</div>
+					<div class="item_right">
+						<div class="item_name">自动定位纬度</div>
+						<input id='Latitude' type="text" class="mui-input" readonly="readonly">
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_name">污染源类型</div>
+					<div id="report_source_type" class="item_r">
+						<input id="report_source_type_input" type="text" class="mui-input" placeholder="--请选择--" readonly="readonly" />
+						<img style="width:10px;height:7px;margin-left: 10px;" src="../../img/drop-down.png" />
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_name">所属属地</div>
+					<div id="report_territoriality_btn" class="item_r">
+						<input id="report_territoriality_btnt_input" type="text" class="mui-input" placeholder="--请选择--" readonly="readonly" />
+						<img style="width:10px;height:7px;margin-left: 10px;" src="../../img/drop-down.png" />
+					</div>
+				</div>
+				<div class="item deal">
+					<div class="item_name">处理说明</div>
+					<textarea id="Description" class="mui-input-clear question" placeholder="请输入内容"></textarea>
+				</div>
+				<div class="item">
+					<div class="item_name">相对位置</div>
+					<input id="Position" type="text" class="mui-input" placeholder="请输入内容">
+				</div>
+				<div class="item">
+					<div class="item_name">所在道路</div>
+					<input id="Street" type="text" class="mui-input" readonly="readonly">
+				</div>
+				<div class="item">
+					<div class="item_name">详细地址</div>
+					<input id="Address" type="text" class="mui-input" readonly="readonly">
+				</div>
+				<div class="item" >
+					<div class="item_name2">上传照片</div>
+					<div class="photo">
+						<div class="photo_content">
+							<div class="photo_content">
+								<div class="photo_item" v-for="(item,index) in imgSrcs">
+									<img v-on:click="cancel(index)" id="cancel_photo" class="cancel_photo" src="../../img/AddPicture-CancelButton.png" />
+									<img id="img" v-bind:src="item.url" v-bind:dst="item.dst" />
+								</div>
+								<div id="add_photo">
+									<img id="add_img" src="../../img/NewTask.png" v-on:click="addPhoto()" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button id="submit_btn" type="button" class="mui-btn mui-btn-primary">提交</button>
+			</div>
+			<!-- 查询 -->
+			<div id="inquire">
+				<div class="select_search">
+					<div class="select_search_itme">
+						<label>污染源类型:</label>
+						<div id="inquire_source_type" class="header_btn">
+							<span id="inquire_source_type_text">==ALL==</span>
+							<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+						</div>
+					</div>
+					<div class="select_search_itme">
+						<label>所属属地:</label>
+						<div id="inquire_territoriality_btn" class="header_btn">
+							<span id="inquire_territoriality_btn_text">==ALL==</span>
+							<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+						</div>
+					</div>
+					<div class="select_search_itme">
+						<label>发现时间从:</label>
+						<div class="time_select">
+							<div id="startTime_btn" class="date_btn" type="0">
+								<span id="startTime_btn_text">2018-10-19</span>
+								<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+							</div>
+							<span>&nbsp;到</span>
+							<div id="endTime_btn" class="date_btn" type="0">
+								<span id="endTime_btn_text">2018-10-19</span>
+								<img width="11px" height="11px" src="../../img/daqi/map_chart_xiala_icon.png" />
+							</div>
+							<button id="inquire" type="button" class="mui-btn mui-btn-primary">查询</button>
+						</div>
+					</div>
+					<button id="search_btn" type="button" class="mui-btn mui-btn-primary">查询</button>
+				</div>
+				<div id="table_content" class="table_content">
+					<div id="table" class="table">
+						<table border="1">
+							<tr>
+								<th>填报人</th>
+								<th>填报时间</th>
+								<th>污染源类型</th>
+								<th>所属属地</th>
+								<th>所在道路</th>
+								<th>操作</th>
+							</tr>
+
+							<tr v-for="(item,index) in DataList">
+								<td>{{item.REPORTER}}</td>
+								<td>{{item.TIMEPOINT}}</td>
+								<td>{{item.POLLUTYPE}}</td>
+								<td>{{item.ATTRIBUTION}}</td>
+								<td>{{item.STREET}}</td>
+								<td>
+									<button id="view_btn" type="button" @click="delItem(item, index)">
+										删除
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/citys.js"></script>
+		<script src="../../js/daqi/comm.js"></script>
+		<script src="../../js/daqi/patrol.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</body>
+</html>

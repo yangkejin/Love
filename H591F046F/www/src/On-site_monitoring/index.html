@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		<style>
+			
+			.header {
+				position: fixed;
+				height: 49px;
+				line-height: 49px;
+				font-size: 18px;
+				width: 100%;
+				text-align: center;
+				color: white;
+				background-color: #2a68cd;
+				z-index: 1001;
+			}
+			
+			.header>.back_v {
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				width: 50px;
+			}
+			
+			.top_bg {
+				position: relative;
+				top: 49px;
+			}
+			
+			.content {
+				width: 90%;
+				height: 60%;
+				position: relative;
+				top: 20px;
+				left: 5%;
+				padding-top: 49px;
+				background-color: white;
+				border-radius:5px;
+				box-shadow:0px 0px 15px #666;
+			}
+			
+			ul {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.item {
+				width: 50%;
+				height: 50%;
+				float: left;
+				text-align: center;
+				position: relative;
+			}
+			
+			.icon {
+				position: relative;
+				width: 80%;
+				height: 60%;
+				margin-left: 10%;
+				background-color: red;
+				border-radius:5px;
+			}
+
+			p {
+				margin-top: 8px;
+				color: #000000;
+			}
+			
+			.icon_title {
+				display: inline-block;
+				margin-top: 8px;
+				font-size: 25px;
+				color: white;
+				position: absolute;
+				left: 8px;
+				top: 8px;
+			}
+			.icon_img {
+				position: absolute;
+				right: 8px;
+				bottom: 8px;
+				width: 50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<span id="header_title">现场监测管理</span>
+			<div id="back_v" class="back_v">
+				<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+		</div>
+		<img class="top_bg" src="../../img/On-site_monitoring/main_banner.png" width="100%" height="30%" />
+		<div class="content">
+			<ul>
+				<li class="item" value="0">
+					<div class="icon" style="background-color: #3fc0ad;">
+						<div class="icon_title">气</div>
+						<img class="icon_img" src="../../img/On-site_monitoring/icon_main_air.png"/>
+					</div>
+					<p>大气监测<p>
+				</li>
+				<li class="item" value="1" >
+					<div class="icon" style="background-color: #7c61c7;">
+						<div class="icon_title">水</div>
+						<img class="icon_img" src="../../img/On-site_monitoring/icon_main_water.png"/>
+					</div>
+					<p>水环境监测</p>
+				</li>
+				<li class="item" value="2">
+					<div class="icon" style="background-color: #3788d1;">
+						<div class="icon_title">土</div>
+						<img class="icon_img" src="../../img/On-site_monitoring/icon_main_soil.png"/>
+					</div>
+					<p>土壤监测</p>
+				</li>
+				<li class="item" value="3">
+					<div class="icon" style="background-color: #e68c4e;">
+						<div class="icon_title">声</div>
+						<img class="icon_img" src="../../img/On-site_monitoring/icon_main_voice.png"/>
+					</div>
+					<p>声环境监测</p>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground("#2a68cd");
+			});
+			document.getElementById("back_v").addEventListener("tap", function() {
+				// var webAppController = plus.ios.importClass("WebAppController");
+				// webAppController.back();
+				mui.back();
+			});
+			mui.ready(function() {
+				$(".item").click(function() {
+					var value = $(this).attr("value");
+					if (value == 0) {
+						mui.openWindow({
+							url: 'task_reception.html',
+							id: 'task_reception',
+							waiting: {
+								title: '正在跳转...',
+							}
+						});
+					} else if (value == 1) {
+						mui.openWindow({
+							url: 'shui/index.html',
+							id: 'shui_index',
+							waiting: {
+								title: '正在跳转...',
+							}
+						});
+					} else if (value == 2) {
+						mui.openWindow({
+							url: 'hand_over_sample.html',
+							id: 'hand_over_sample',
+							waiting: {
+								title: '正在跳转...',
+							}
+						});
+					} else if (value == 3) {
+						mui.openWindow({
+							url: 'data_query.html',
+							id: 'data_query',
+							waiting: {
+								title: '正在跳转...',
+							}
+						});
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

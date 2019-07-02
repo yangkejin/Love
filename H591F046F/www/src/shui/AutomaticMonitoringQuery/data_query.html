@@ -1,0 +1,508 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../../js/mui.js"></script>
+		<link href="../../../css/reset.css" rel="stylesheet" />
+
+		<link href="../../../lib/swiper.min.css" rel="stylesheet" />
+		<script src="../../../lib/swiper.min.js"></script>
+		<script src="../../../lib/jquery-3.3.1.min.js"></script>
+
+		<script src="../../../lib/tool/upDropDownMenu.js"></script>
+
+		<link href="../../../css/shui/AutomaticMonitoringQuery/data_query.css" rel="stylesheet" />
+
+		<script src="../../../lib/vue.min.js"></script>
+		<script src="../../../lib/data/shui/Datas.js"></script>
+		<script src="../../../lib/data/shui/URLs.js"></script>
+		<script src="../../../lib/data/Internet.js"></script>
+		<script src="../../../lib/data/StorageTool.js"></script>
+		<script src="../../../lib/data/webSQLTool.js"></script>
+
+		<link href="../../../lib/datepicker/mui.picker.min.css" rel="stylesheet" />
+		<script src="../../../lib/datepicker/mui.picker.min.js"></script>
+
+		<link href="../../../lib/datepicker/mui.dtpicker.css" rel="stylesheet" />
+		<script src="../../../lib/datepicker/mui.dtpicker.js"></script>
+
+		<script src="../../../lib/tool/DateTool.js"></script>
+		<script src="../../../lib/fastclick.js"></script>
+
+
+		<style>
+
+
+		</style>
+	</head>
+
+	<body>
+		<div id="selectTip">
+			<div class="selectTip_header">
+				<span id="header_title">选择监测项</span>
+				<div id="selectTip_back" class="back_v" href="#">
+					×
+				</div>
+			</div>
+			<div class="selectTip_content select_monitoringItem">
+				<ul>
+					<li v-for="(item,index) in ExtensionData" @click="selectItem(item)" v-bind:style="bindColor(item)">{{item.Name}}</li>
+				</ul>
+			</div>
+			<div class="btn_content">
+				<button id="cancel_btn" type="button" class="mui-btn mui-btn-primary">取消</button>
+				<button id="determine_btn" type="button" class="mui-btn mui-btn-primary">确定</button>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+
+		<div class="header">
+			<span id="header_title">数据查询</span>
+			<div id="back_v" class="back_v">
+				<img src="../../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+			</div>
+		</div>
+		<div class="content">
+			<ul class="condition_list">
+				<li class="item">
+					<div class="item_l">选择站点：</div>
+					<input id="select_station" type="text" class="mui-input" placeholder="点击选择站点" readonly="readonly" />
+				</li>
+				<li class="item">
+					<div class="item_l">开始时间：</div>
+					<input id="start_time" type="text" class="mui-input" placeholder="点击选择时间" readonly="readonly" />
+				</li>
+				<li class="item">
+					<div class="item_l">结束时间：</div>
+					<input id="end_time" type="text" class="mui-input" placeholder="点击选择时间" readonly="readonly" />
+				</li>
+				<li class="item">
+					<div class="item_l">监测项：</div>
+					<input id="monitoringItem" type="text" class="mui-input" placeholder="点击选择监测项" readonly="readonly" />
+				</li>
+			</ul>
+
+			<div class="query_btns">
+				<ul class="week_mouth">
+					<li type="week">本周</li>
+					<li type="month">本月</li>
+				</ul>
+				<button id="query" type="button" class="mui-btn mui-btn-primary">查询</button>
+				<div style="clear: both;"></div>
+			</div>
+
+			<div class="data_content">
+				<ul class="nav_tabs">
+					<li class="active" type="0">监测数据</li>
+					<li type="1" style="display: none;">两率统计</li>
+					<div style="clear: both;"></div>
+				</ul>
+				<div class="bottom_conntent" id="monitoring_data">
+					<div class="title">小东庄站 2009-06-01至2019-06-30监测结果</div>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<div class="swiper-slide-content">
+									1
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="swiper-slide-content">
+									<div class="table">
+										<table>
+											<tr>
+												<th>时间</th>
+												<th>监测项目</th>
+												<th>监测值</th>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+											<tr>
+												<td>2017/6/9 14:56</td>
+												<td>pH</td>
+												<td>7.71</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="bottom_conntent" id="statistics">
+					<div class="table">
+						<table>
+							<tr>
+								<th>站点名称</th>
+								<th>监测项目</th>
+								<th>捕获率</th>
+								<th>有效率</th>
+							</tr>
+
+							<tr>
+								<td>小东庄</td>
+								<td>pH</td>
+								<td>8.9%</td>
+								<td>8%</td>
+							</tr>
+							<tr style="background-color:beige;">
+								<td>总体捕获率</td>
+								<td>1.1%</td>
+								<td>总体有效率</td>
+								<td>1%</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				mui.init();
+
+				window.addEventListener("load", function() {
+					FastClick.attach(document.body);
+				}, false);
+
+
+				document.getElementById("back_v").addEventListener("tap", function() {
+					mui.back();
+				});
+
+
+
+
+				var swiper = new Swiper('.swiper-container', {
+					observer: true, //修改swiper自己或子元素时，自动初始化swiper
+					observeParents: true, //修改swiper的父元素时，自动初始化swiper
+				});
+
+				var monitoring_data = document.getElementById("monitoring_data");
+				//var statistics = document.getElementById("statistics");
+
+				// mui('.nav_tabs').on('tap', 'li', function(e) {
+				// 	var type = $(this).attr("type");
+				// 	var str = ".nav_tabs"+" li";
+				// 	$(str).attr("class","");
+				// 	$(this).attr("class","active");
+				// 	if ( type == 0) {
+				// 		monitoring_data.style.display = "block";
+				// 		statistics.style.display = "none";
+				// 	}else{
+				// 		monitoring_data.style.display = "none";
+				// 		statistics.style.display = "block";
+				// 	}
+				// });
+
+				var datas = new Datas();
+				var StationNames = [];
+				var StationIds = [];
+
+				datas.GetWoStations(function(DBData) {
+					if (DBData) {
+						filterData(DBData.ExtensionData);
+					}
+				}, function(NewData) {
+					if (NewData) {
+						filterData(NewData.ExtensionData);
+					}
+				});
+
+				function filterData(arr) {
+					StationNames = new Array();
+					StationIds = new Array();
+					for (var i = 0; i < arr.length; i++) {
+						var dic = arr[i];
+						StationNames.push(dic.StationName);
+						StationIds.push(dic.StationId);
+					}
+				}
+
+				var select_station = document.getElementById("select_station");
+				var formatSelectValue;
+				select_station.addEventListener("click", function() {
+					var menu = new upDropDownMenu();
+					menu.btn = select_station;
+					menu.btn_text = select_station;
+					menu.arrowHeight = 0;
+					menu.liDatas = StationNames;
+					menu.liValues = StationIds;
+					menu.show(menu.Direction.auto, function(index, html, value) {
+						select_station.value = html;
+						formatSelectValue = value;
+					});
+				});
+
+
+				var start_time = document.getElementById("start_time");
+				start_time.addEventListener("click", function() {
+					var date = new Date();
+					var _self = this;
+					var beginY = 2015;
+					var endY = date.getFullYear();
+					var m = date.getMonth() + 1;
+					var d = date.getDate();
+
+					var optionsJson = {
+						"value": _self.value,
+						"type": "date",
+						"beginYear": beginY,
+						"beginMonth": m,
+						"beginDay": 1,
+						"endYear": endY,
+						"endMonth": m,
+						"endDay": d,
+					};
+					_self.picker = new mui.DtPicker(optionsJson);
+					_self.picker.show(function(rs) {
+						var value = rs.value;
+						value = value.replace(new RegExp('/', 'g'), '-');
+						start_time.value = value;
+						_self.picker.dispose();
+						_self.picker = null;
+						//upDownRefresh.headerBeginRefreshing();
+					});
+				});
+
+				var end_time = document.getElementById("end_time");
+				end_time.addEventListener("click", function() {
+					var date = new Date();
+					var _self = this;
+					var beginY = 2015;
+					var endY = date.getFullYear();
+					var m = date.getMonth() + 1;
+					var d = date.getDate();
+
+					var optionsJson = {
+						"value": _self.value,
+						"type": "date",
+						"beginYear": beginY,
+						"beginMonth": m,
+						"beginDay": 1,
+						"endYear": endY,
+						"endMonth": m + 1,
+						"endDay": d,
+					};
+					_self.picker = new mui.DtPicker(optionsJson);
+					_self.picker.show(function(rs) {
+						var value = rs.value;
+						value = value.replace(new RegExp('/', 'g'), '-');
+						end_time.value = value;
+						_self.picker.dispose();
+						_self.picker = null;
+						//upDownRefresh.headerBeginRefreshing();
+					});
+				});
+
+				function selectItem(item) {
+					if (isPresence(select_monitoringItem.selectData, item)) {
+						select_monitoringItem.selectData.splice(getArrIndex(select_monitoringItem.selectData, item), 1);
+					} else {
+						select_monitoringItem.selectData.push(item);
+					}
+					select_monitoringItem.$forceUpdate();
+				}
+
+				function isPresence(arr, item) {
+					for (var i = 0; i < arr.length; i++) {
+						var dic = arr[i];
+						if (dic == item) {
+							return true;
+						}
+					}
+					return false;
+				}
+
+				function getArrIndex(arr, item) {
+					for (var i = 0; i < arr.length; i++) {
+						var dic = arr[i];
+						if (dic == item) {
+							return i;
+						}
+					}
+				}
+
+				var select_monitoringItem = new Vue({
+					el: '.select_monitoringItem',
+					data: {
+						ExtensionData: [],
+						selectData: []
+					},
+					methods: {
+						selectItem: function(item) {
+							selectItem(item);
+						},
+						bindColor: function(item) {
+							for (var i = 0; i < this.selectData.length; i++) {
+								var dic = this.selectData[i];
+								if (item.Name == dic.Name) {
+									return {
+										"background": "rgba(39,163,241,.4)",
+										"border": "1px solid #27A3F1"
+									}
+								}
+							}
+							return {
+								"border": "1px solid #CCCCCC",
+								"color": "black"
+							}
+						},
+					}
+				});
+				datas.GetStationDetectionItems(function(DBData) {
+					if (DBData) {
+						select_monitoringItem.ExtensionData = DBData.ExtensionData;
+					}
+				}, function(NewData) {
+					if (NewData) {
+						select_monitoringItem.ExtensionData = NewData.ExtensionData;
+					}
+				});
+
+				var selectTip = document.getElementById("selectTip");
+				var old_selectData = [];
+				document.getElementById("selectTip_back").addEventListener("tap", function() {
+					selectTip.style.display = "none";
+				});
+
+				var monitoringItem = document.getElementById("monitoringItem");
+				monitoringItem.addEventListener("tap", function() {
+					selectTip.style.display = "block";
+					old_selectData = [].concat(select_monitoringItem.selectData);
+				});
+
+				document.getElementById("cancel_btn").addEventListener("tap", function() {
+					selectTip.style.display = "none";
+					select_monitoringItem.selectData = old_selectData;
+					select_monitoringItem.$forceUpdate();
+				});
+
+				document.getElementById("determine_btn").addEventListener("tap", function() {
+					selectTip.style.display = "none";
+
+					var arr = select_monitoringItem.selectData;
+					var nameArr = [];
+
+					for (var i = 0; i < arr.length; i++) {
+						var dic = arr[i];
+						nameArr.push(dic.Name);
+					}
+					var names = nameArr.join(",");
+
+					monitoringItem.value = names;
+				});
+
+
+				mui('.week_mouth').on('tap', 'li', function(e) {
+					var type = $(this).attr("type");
+					var str = ".week_mouth" + " li";
+					$(str).attr("class", "");
+					$(this).attr("class", "active");
+
+					if (type == "week") {
+						start_time.value = getWeekStartDate();
+						end_time.value = getWeekEndDate();
+					} else {
+						start_time.value = getMonthStartDate();
+						end_time.value = getMonthEndDate();
+					}
+				});
+
+				var now = new Date(); //当前日期 
+				var nowDayOfWeek = now.getDay(); //今天本周的第几天 
+				var nowDay = now.getDate(); //当前日 
+				var nowMonth = now.getMonth(); //当前月 
+				var nowYear = now.getYear(); //当前年 
+				nowYear += (nowYear < 2000) ? 1900 : 0; // 
+
+				//获得本周的开端日期 
+				function getWeekStartDate() {
+					var weekStartDate = new Date(nowYear, nowMonth, nowDay - nowDayOfWeek + 1);
+					return weekStartDate.Format("yyyy-MM-dd");
+				}
+
+				//获得本周的停止日期 
+				function getWeekEndDate() {
+					var weekEndDate = new Date(nowYear, nowMonth, nowDay + (6 - nowDayOfWeek + 1));
+					return weekEndDate.Format("yyyy-MM-dd");
+				}
+
+
+				//获得本月的开端日期 
+				function getMonthStartDate() {
+					var monthStartDate = new Date(nowYear, nowMonth, 1);
+					return monthStartDate.Format("yyyy-MM-dd");
+				}
+
+				//获得本月的停止日期 
+				function getMonthEndDate() {
+					var monthEndDate = new Date(nowYear, nowMonth, getMonthDays(nowMonth));
+					return monthEndDate.Format("yyyy-MM-dd");
+				}
+
+				//获得某月的天数 
+				function getMonthDays(myMonth) {
+					var monthStartDate = new Date(nowYear, myMonth, 1);
+					var monthEndDate = new Date(nowYear, myMonth + 1, 1);
+					var days = (monthEndDate - monthStartDate) / (1000 * 60 * 60 * 24);
+					return days;
+				}
+			</script>
+	</body>
+
+</html>

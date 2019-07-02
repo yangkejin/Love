@@ -1,0 +1,148 @@
+body {
+
+	font-size: 15px;
+}
+
+/*img{
+				max-height: 10px;
+				max-width: 10px;
+			}*/
+
+.header {
+	position: relative;
+	height: 49px;
+	line-height: 49px;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+	color: white;
+	background-color: #2a68cd;
+	z-index: 1001;
+}
+
+.header>.back_v {
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	width: 50px;
+}
+
+.header>.none_v {
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	width: 50px;
+	font-size: 15px;
+}
+
+.content {
+	position: relative;
+	top: 0;
+}
+
+.chosen_header,
+.select_header {
+	background-color: lightgray;
+	margin-top: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.chosen_ul {
+	margin-top: 10px;
+	height: 120px;
+	overflow: auto;
+}
+
+.chosen_li {
+	display: inline-block;
+	float: left;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 5px;
+	border: 1px solid lightgray;
+}
+
+/* .water_ul {
+				display: -webkit-box;
+				overflow-x: scroll;
+				-webkit-overflow-scrolling: touch;
+				height: 44px;
+			}
+			
+			.water_ul::-webkit-scrollbar {
+				display: none
+			}
+			
+			.water_li {
+				height: 44px;
+				line-height: 44px;
+				margin-left: 10px;
+			} */
+
+.water_content {
+	position: fixed;
+	top: 261px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.water_content_left,
+.water_content_right {
+	width: 50%;
+	height: 100%;
+	overflow: scroll;
+	float: left;
+	background-color: #f1f2f3;
+}
+
+.water_content_right {
+	background-color: white;
+}
+
+.water_left {
+	/* height: 1000px; */
+}
+
+.water_right {
+	/* height: 1000px; */
+}
+
+.water_left li {
+	padding: 10px;
+	background-color: #f1f2f3;
+}
+
+.water_right li {
+	padding: 10px;
+	position: relative;
+}
+
+.water_right_li span {
+	position: relative;
+	left: 0;
+}
+
+.water_right_li div {
+	display: inline-block;
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	right: 10px;
+	background-repeat: no-repeat;
+	-webkit-background-size: 100% 100%;
+}
+
+.water_right_li:before {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: "";
+	height: 1px;
+	z-index: 50;
+	background: #d7d7d7;
+	-webkit-transform: scaleY(0.5);
+}

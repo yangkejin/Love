@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/reset.css" rel="stylesheet" />
+		<link href="../../css/mapRemoveLog.css" rel="stylesheet" />
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/addPolygon.js"></script>
+		<script src="../../js/VOCs/bjsy.js"></script>
+		<script src="../../lib/jquery-3.3.1.min.js"></script>
+		<link href="../../css/VCOs/home.css" rel="stylesheet" />
+		
+		<script src="../../lib/data/VOCs/URLs.js"></script>
+		<script src="../../lib/data/VOCs/Datas.js"></script>
+		<script src="../../lib/data/Internet.js"></script>
+		<script src="../../lib/data/StorageTool.js"></script>
+		<script src="../../lib/data/webSQLTool.js"></script>
+	
+		<script src="../../lib/tool/DateTool.js"></script>
+
+		<script src="../../lib/vue.min.js"></script>
+	</head>
+
+	<body>
+
+		<div class="content">
+			<div class="header">
+				<span id="header_title">顺义区企业VOCs排放管理</span>
+				<div id="back_v" class="back_v">
+					<img src="../../img/daqi/back.png" style="width: 10px;height: 15px;" />
+				</div>
+			</div>
+			<div style="position: absolute;top: 45px;bottom: 0;left: 0;right: 0;">
+				<div id="mapContainer">
+					<div style="width: 100px; display:inline;font-size: 15px;position: absolute;top: 45%;margin-left: -50px;">
+						地图加载中...
+					</div>
+				</div>
+			</div>
+
+			<div id="info_window">
+
+				<div id="info_window_header">
+					<div id="info_window_header_title">{{dic.ENTERPRISENAME}}</div>
+					<div id="info_window_close"><img src="../../img/close.png" width="20px" height="20px"></div>
+				</div>
+
+				<div id="info_window_content">
+					<div id="station_info_list">
+<!-- 						<div id="station_name">顺义区造纸厂1</div>
+ -->						<div class="item">
+							<div class="item_name">单位地址：</div>
+							<div class="item_value">{{dic.ADDRESS}}</div>
+						</div>
+						<div class="item">
+							<div class="item_name">经度：</div>
+							<div class="item_value">{{dic.LONGITUDE}}</div>
+						</div>
+						<div class="item">
+							<div class="item_name">纬度：</div>
+							<div class="item_value">{{dic.LATITUDE}}</div>
+						</div>
+						<div class="item">
+							<div class="item_name">企业联系人：</div>
+							<div class="item_value">{{dic.CONTRACT}}</div>
+						</div>
+						<div class="item">
+							<div class="item_name">联系电话：</div>
+							<div class="item_value">{{dic.TELEPHONE}}</div>
+						</div>
+						<div class="item">
+							<div class="item_name">组织机构代码：</div>
+							<div class="item_value">{{dic.LEGAL_ENTERPRISE_NUM}}</div>
+						</div>
+						<div class="item">
+							<div class="item_name">行业代码：</div>
+							<div class="item_value">{{dic.LEGAL_ENTERPRISE_NUM}}</div>
+						</div>
+						<div class="item">
+							<div class="item_name">建厂时间：</div>
+							<div class="item_value" v-html="getTimePoint(dic.BUILDTIME)"></div>
+						</div>
+						<div class="item">
+							<div class="item_name">职工人数：</div>
+							<div class="item_value">{{dic.STAFFNUM}}</div>
+						</div>
+						<div class="item">
+							<div class="item_name">主要产品和产能：</div>
+							<div class="item_value">{{dic.PRODUCTANDCAPACITY}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script src="../../js/VOCs/comm.js"></script>
+		<script src="../../js/VOCs/home.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</body>
+
+</html>
